@@ -36,6 +36,7 @@
 		</div>
 	</div>
 	<div class="row">
+	<!-- Put this in loop from here to -->
 	<div class="col s3 m3">
 		<div class="card ">
     <div class="card-image waves-effect waves-block waves-light">
@@ -51,7 +52,7 @@
     </div>
   </div>
 	</div>
-		
+		<!-- till here -->
 	</div>
 </body>
 </html>
