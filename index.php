@@ -20,10 +20,10 @@ session_start();
 		<div class="card deep-orange darken-2">
 			<div class="card-content white-text">
 				<div class="row">
-					<div class="col m2">
+					<div class="col s12 m2">
 						<span class="card-title white-text shiftDown">Shopgasm</span>
 					</div>
-					<div class="input-field col s11 m6">
+					<div class="input-field col s10 m6">
 						<input placeholder="Type here" id="query" name = "q" type="text" class="validate white-text">
 						<label for="query" class="white-text">What are you looking for today?</label>
 					</div>
@@ -96,12 +96,12 @@ session_start();
 					<div id="signup" class="col s12">
 						<p><h4>Sign Up</h4></p>
 						<form action="" method="post">
-							<div class="input-field col s6">
+							<div class="input-field col s12 m6">
 								<i class="material-icons prefix">account_circle</i>
 								<input id="icon_prefix" type="text" class="validate" name="firstName">
 								<label for="icon_prefix">First Name</label>
 							</div>
-							<div class="input-field col s6">
+							<div class="input-field col s12 m6">
 								<i class="material-icons prefix">account_circle</i>
 								<input id="icon_prefix" type="text" class="validate" name="lastName">
 								<label for="icon_prefix">Last Name</label>
@@ -116,14 +116,17 @@ session_start();
 								<input id="icon_prefix" type="email" class="validate" name="email">
 								<label for="icon_prefix">Email</label>
 							</div>
-							<div class="input-field col s6" >
+							<div class="input-field col s12 m6" >
 								<i class="material-icons prefix" id="userNameParent">supervisor_account</i>
 								<input id="userName" type="text" name="userName" class="validate" onkeyup="getUserName(this.value);" >
 								<label for="icon_prefix">New User Name</label>
 							</div>
-							<div class="input-field col s6">
+				<div class="input-field col s6">
 								<i class="material-icons prefix" id="phoneNumberParent">phone</i>
 								<input type="text" class="validate" name="phoneNumber" onkeyup="checkPhoneNumber(this.value);">
+							<div class="input-field col s12 m6">
+								<i class="material-icons prefix">phone</i>
+								<input id="icon_prefix" type="text" class="validate">
 								<label for="icon_prefix">Phone Number</label>
 							</div>
 							<div class="input-field col s12">
