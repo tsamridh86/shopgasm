@@ -26,7 +26,7 @@ class Users{
 			return -1;
 		}
 	}
-	public function isSignUp($firstName, $lastName,$userName,$password,$phoneNumber){
+	public function isSignUp($firstName, $lastName,$userName,$password,$phoneNumber,$email){
 		$check=$this->checkUsername($userName);
 		if($check == -1)
 		{
@@ -34,7 +34,7 @@ class Users{
 		}
 		else{
 			$password = md5($password);
-			$query1 = "INSERT INTO users(userName,password,firstName,lastName,phoneNo) Values('$userName','$password','$firstName','$lastName','$phoneNumber')";
+			$query1 = "INSERT INTO users(userName,password,firstName,lastName,phoneNo,email) Values('$userName','$password','$firstName','$lastName','$phoneNumber','$email')";
 			if($this->conn->query($query1))
 		{
 			return true;

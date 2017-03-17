@@ -121,13 +121,9 @@ session_start();
 								<input id="userName" type="text" name="userName" class="validate" onkeyup="getUserName(this.value);" >
 								<label for="icon_prefix">New User Name</label>
 							</div>
-				<div class="input-field col s6">
+				<div class="input-field col s12 m6">
 								<i class="material-icons prefix" id="phoneNumberParent">phone</i>
 								<input type="text" class="validate" name="phoneNumber" onkeyup="checkPhoneNumber(this.value);">
-							<div class="input-field col s12 m6">
-								<i class="material-icons prefix">phone</i>
-								<input id="icon_prefix" type="text" class="validate">
-								<label for="icon_prefix">Phone Number</label>
 							</div>
 							<div class="input-field col s12">
 								<i class="material-icons prefix" id="passwordParent">vpn_key</i>
@@ -193,7 +189,7 @@ $user = new Users($conn);
 if(isset($_POST['signUp']))
 {
 
-$isSignUp=$user->isSignUp($_POST['firstName'],$_POST['lastName'],$_POST['userName'],$_POST['password'],$_POST['phoneNumber']);
+$isSignUp=$user->isSignUp($_POST['firstName'],$_POST['lastName'],$_POST['userName'],$_POST['password'],$_POST['phoneNumber'],$_POST['email']);
 if($isSignUp === true)
 {
 	// echo $isSignUp;
