@@ -15,10 +15,10 @@
 		<div class="card deep-orange darken-2">
 			<div class="card-content white-text">
 				<div class="row">
-					<div class="col m2">
+					<div class="col s12 m2">
 						<span class="card-title white-text shiftDown">Shopgasm</span>
 					</div>
-					<div class="input-field col s11 m6">
+					<div class="input-field col s10 m6">
 						<input placeholder="Type here" id="query" name = "q" type="text" class="validate white-text">
 						<label for="query" class="white-text">What are you looking for today?</label>
 					</div>
@@ -91,12 +91,12 @@
 					<div id="signup" class="col s12">
 						<p><h4>Sign Up</h4></p>
 						<form action="" method="post">
-							<div class="input-field col s6">
+							<div class="input-field col s12 m6">
 								<i class="material-icons prefix">account_circle</i>
 								<input id="icon_prefix" type="text" class="validate">
 								<label for="icon_prefix">First Name</label>
 							</div>
-							<div class="input-field col s6">
+							<div class="input-field col s12 m6">
 								<i class="material-icons prefix">account_circle</i>
 								<input id="icon_prefix" type="text" class="validate">
 								<label for="icon_prefix">Last Name</label>
@@ -106,12 +106,12 @@
 								<input id="icon_prefix" type="text" class="validate">
 								<label for="icon_prefix">Address</label>
 							</div>
-							<div class="input-field col s6">
+							<div class="input-field col s12 m6">
 								<i class="material-icons prefix">supervisor_account</i>
 								<input id="icon_prefix" type="text" class="validate">
 								<label for="icon_prefix">New User Name</label>
 							</div>
-							<div class="input-field col s6">
+							<div class="input-field col s12 m6">
 								<i class="material-icons prefix">phone</i>
 								<input id="icon_prefix" type="text" class="validate">
 								<label for="icon_prefix">Phone Number</label>
