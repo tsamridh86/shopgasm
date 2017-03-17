@@ -68,7 +68,7 @@
 						<form method="post" action="">
 							<div class="input-field col s12">
 								<i class="material-icons prefix">account_circle</i>
-								<input id="icon_prefix" type="text" class="validate">
+								<input id="icon_prefix" type="text" class="validate" >
 								<label for="icon_prefix">User Name</label>
 							</div>
 							<div class="input-field col s12">
@@ -106,9 +106,9 @@
 								<input id="icon_prefix" type="text" class="validate">
 								<label for="icon_prefix">Address</label>
 							</div>
-							<div class="input-field col s6">
-								<i class="material-icons prefix">supervisor_account</i>
-								<input id="icon_prefix" type="text" class="validate">
+							<div class="input-field col s6" >
+								<i class="material-icons prefix" id="userNameParent">supervisor_account</i>
+								<input id="userName" type="text" class="validate" onkeyup="getUserName(this.value);" >
 								<label for="icon_prefix">New User Name</label>
 							</div>
 							<div class="input-field col s6">
@@ -117,13 +117,13 @@
 								<label for="icon_prefix">Phone Number</label>
 							</div>
 							<div class="input-field col s12">
-								<i class="material-icons prefix">vpn_key</i>
-								<input id="icon_prefix" type="text" class="validate">
+								<i class="material-icons prefix" id="passwordParent">vpn_key</i>
+								<input type="password" class="validate" id="password">
 								<label for="icon_prefix">New Password</label>
 							</div>
 							<div class="input-field col s12">
-								<i class="material-icons prefix">replay</i>
-								<input id="icon_prefix" type="text" class="validate">
+								<i class="material-icons prefix" id="confirmPasswordParent">replay</i>
+								<input id="confirmPassword" type="password" class="validate" onkeyup="checkPassword(this.value);">
 								<label for="icon_prefix">Re-type Password</label>
 							</div>
 							<div class="col s6">
