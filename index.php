@@ -91,10 +91,30 @@
 					<div id="signup" class="col s12">
 						<p><h4>Sign Up</h4></p>
 						<form action="" method="post">
-							<div class="input-field col s12">
+							<div class="input-field col s6">
 								<i class="material-icons prefix">account_circle</i>
 								<input id="icon_prefix" type="text" class="validate">
+								<label for="icon_prefix">First Name</label>
+							</div>
+							<div class="input-field col s6">
+								<i class="material-icons prefix">account_circle</i>
+								<input id="icon_prefix" type="text" class="validate">
+								<label for="icon_prefix">Last Name</label>
+							</div>
+							<div class="input-field col s12">
+								<i class="material-icons prefix">home</i>
+								<input id="icon_prefix" type="text" class="validate">
+								<label for="icon_prefix">Address</label>
+							</div>
+							<div class="input-field col s6">
+								<i class="material-icons prefix">supervisor_account</i>
+								<input id="icon_prefix" type="text" class="validate">
 								<label for="icon_prefix">New User Name</label>
+							</div>
+							<div class="input-field col s6">
+								<i class="material-icons prefix">phone</i>
+								<input id="icon_prefix" type="text" class="validate">
+								<label for="icon_prefix">Phone Number</label>
 							</div>
 							<div class="input-field col s12">
 								<i class="material-icons prefix">vpn_key</i>
