@@ -26,5 +26,25 @@ class Users{
 			return -1;
 		}
 	}
-}
+	public function isSignUp($firstName, $lastName,$userName,$password,$phoneNumber){
+		$check=$this->checkUsername($userName);
+		if($check == -1)
+		{
+			return "Username Already exists";
+		}
+		else{
+			$password = md5($password);
+			$query1 = "INSERT INTO users(userName,password,firstName,lastName,phoneNo) Values('$userName','$password','$firstName','$lastName','$phoneNumber')";
+			if($this->conn->query($query1))
+		{
+			return true;
+		}
+			else
+		{
+			return "Soory something went wrong";
+		}
+		}
+	}
+
+}	
 ?>

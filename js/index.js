@@ -52,4 +52,21 @@ function checkPassword(str)
 
     }
 }
+function checkPhoneNumber(str)
+{
+    if(str.length == 10)
+    {
+        document.getElementById("phoneNumberParent").innerHTML="phone"
+        return
+    }
+    else if(str.length == 0)
+    {
+        document.getElementById("phoneNumberParent").innerHTML="phone"
+       return 
+    }
+    else{
+        document.getElementById("phoneNumberParent").innerHTML="call_end"
+        return
+    }
+}
 

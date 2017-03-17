@@ -1,3 +1,8 @@
+<?php
+require_once 'config/connection.php';
+require_once 'config/classes.php';
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -68,16 +73,16 @@
 						<form method="post" action="">
 							<div class="input-field col s12">
 								<i class="material-icons prefix">account_circle</i>
-								<input id="icon_prefix" type="text" class="validate" >
+								<input id="icon_prefix" type="text" class="validate" name="userName1">
 								<label for="icon_prefix">User Name</label>
 							</div>
 							<div class="input-field col s12">
 								<i class="material-icons prefix">vpn_key</i>
-								<input id="icon_prefix" type="text" class="validate">
+								<input id="icon_prefix" type="password" class="validate" name="password1">
 								<label for="icon_prefix">Password</label>
 							</div>
 							<div class="col s6">
-								<button class="btn waves-effect waves-light modal-close" type="submit">Login
+								<button class="btn waves-effect waves-light modal-close" type="submit" name="login">Login
 								<i class="material-icons right">input</i>
 								</button>
 							</div>
@@ -93,32 +98,37 @@
 						<form action="" method="post">
 							<div class="input-field col s6">
 								<i class="material-icons prefix">account_circle</i>
-								<input id="icon_prefix" type="text" class="validate">
+								<input id="icon_prefix" type="text" class="validate" name="firstName">
 								<label for="icon_prefix">First Name</label>
 							</div>
 							<div class="input-field col s6">
 								<i class="material-icons prefix">account_circle</i>
-								<input id="icon_prefix" type="text" class="validate">
+								<input id="icon_prefix" type="text" class="validate" name="lastName">
 								<label for="icon_prefix">Last Name</label>
-							</div>
+							</div><!-- 
 							<div class="input-field col s12">
 								<i class="material-icons prefix">home</i>
-								<input id="icon_prefix" type="text" class="validate">
+								<input id="icon_prefix" type="text" class="validate" name="address">
 								<label for="icon_prefix">Address</label>
+							</div> -->
+							<div class="input-field col s12">
+								<i class="material-icons prefix">email</i>
+								<input id="icon_prefix" type="email" class="validate" name="email">
+								<label for="icon_prefix">Email</label>
 							</div>
 							<div class="input-field col s6" >
 								<i class="material-icons prefix" id="userNameParent">supervisor_account</i>
-								<input id="userName" type="text" class="validate" onkeyup="getUserName(this.value);" >
+								<input id="userName" type="text" name="userName" class="validate" onkeyup="getUserName(this.value);" >
 								<label for="icon_prefix">New User Name</label>
 							</div>
 							<div class="input-field col s6">
-								<i class="material-icons prefix">phone</i>
-								<input id="icon_prefix" type="text" class="validate">
+								<i class="material-icons prefix" id="phoneNumberParent">phone</i>
+								<input type="text" class="validate" name="phoneNumber" onkeyup="checkPhoneNumber(this.value);">
 								<label for="icon_prefix">Phone Number</label>
 							</div>
 							<div class="input-field col s12">
 								<i class="material-icons prefix" id="passwordParent">vpn_key</i>
-								<input type="password" class="validate" id="password">
+								<input type="password" class="validate" id="password" name="password">
 								<label for="icon_prefix">New Password</label>
 							</div>
 							<div class="input-field col s12">
@@ -127,7 +137,7 @@
 								<label for="icon_prefix">Re-type Password</label>
 							</div>
 							<div class="col s6">
-								<button class="btn waves-effect waves-light modal-close" type="submit">Sign Up
+								<button class="btn waves-effect waves-light modal-close" type="submit" name="signUp">Sign Up
 								<i class="material-icons right">call_made</i>
 								</button>
 							</div>
@@ -175,3 +185,87 @@
 	</body>
 	<script type="text/javascript" src="js/index.js"></script>
 </html>
+<?php
+$user = new Users($conn);
+if(isset($_POST['signUp']))
+{
+
+$isSignUp=$user->isSignUp($_POST['firstName'],$_POST['lastName'],$_POST['userName'],$_POST['password'],$_POST['phoneNumber']);
+if($isSignUp === true)
+{
+	// echo $isSignUp;
+	echo '<script type="text/javascript">
+					$(document).ready(function(){
+					$("#modal1").modal("open");
+						});
+						</script>
+						<div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Successfully Signed Up</h4>
+    </div>
+    <div class="modal-footer">
+      <a href="index.php" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>';
+}
+elseif ($isSignuUp == "Username already exists") {
+	echo '
+	<script type="text/javascript">
+					$(document).ready(function(){
+					$("#modal1").modal("open");
+						});
+						</script>
+						<div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Username already Exists</h4>
+    </div>
+    <div class="modal-footer">
+      <a href="index.php" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>';
+	// echo $isSignUp;
+}
+else{
+	// echo $isSignUp;
+	echo '
+	<script type="text/javascript">
+					$(document).ready(function(){
+					$("#modal1").modal("open");
+						});
+						</script><div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Sorry Something went</h4>
+    </div>
+    <div class="modal-footer">
+      <a href="index.php" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>';
+}
+}
+if(isset($_POST['login']))
+{
+	$userName1=$_POST["userName1"];
+	$password1=$_POST["password1"];
+	$isLogin = $user->isLogin($userName1,$password1);
+	if($isLogin === true)
+	{
+		$_SESSION['userName'] = $userName1;
+		header('location:index.php');
+	}
+	else{
+		echo '<script type="text/javascript">
+					$(document).ready(function(){
+					$("#modal1").modal("open");
+						});
+						</script>
+						<div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Wrong Credentials</h4>
+    </div>
+    <div class="modal-footer">
+      <a href="index.php" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>';
+	}
+}
+?>
