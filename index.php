@@ -7,6 +7,7 @@ session_start();
 <html>
 	<head>
 		<!-- links to all the materalize things, no touchy touchy here -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link rel="stylesheet" href="css/materialize.min.css">
 		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
@@ -41,6 +42,9 @@ session_start();
 		</div>
 		<div class="row">
 			<!-- Put this in loop from here to -->
+			<div class="col s12 m12">
+			<p> Latest in</p>
+			</div>
 			<div class="col s6 m3">
 				<div class="card z-depth-2">
 					<div class="card-image waves-effect waves-block waves-light">
@@ -150,6 +154,7 @@ session_start();
 				</div>
 			</div>
 		</div>
+		<!-- This is the cart modal -->
 		<div id="cartModal" class="modal">
 			<div class="modal-content">
 				<p><h4>Your Cart</h4></p>
