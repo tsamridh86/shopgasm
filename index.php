@@ -18,7 +18,7 @@ session_start();
 		<title> Welcome to Shopgasm!</title>
 	</head>
 	<body>
-		<div class="card deep-orange darken-2">
+		<div class="card deep-orange darken-2 moveUp">
 			<div class="card-content white-text">
 				<div class="row">
 					<div class="col s12 m2">
