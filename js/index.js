@@ -31,24 +31,24 @@ function getUserName(str){
 }
 function checkPassword(str)
 {
-    var password=document.getElementById("password").value;
+    var password=$("#password").val();
     if(str.length ==0)
     {
-        document.getElementById("confirmPasswordParent").innerHTML="replay"
-        return
+        $("#confirmPasswordParent").html("replay");
+        return;
 
     }
     if(str == password)
     {   
-        document.getElementById("confirmPasswordParent").innerHTML="thumb_up"
+        $("#confirmPasswordParent").html("thumb_up");
     }
     else if(str != password)
     {
-        document.getElementById("confirmPasswordParent").innerHTML="thumb_down"
+        $("#confirmPasswordParent").html("thumb_down");
 
     }
     else{
-        document.getElementById("confirmPasswordParent").innerHTML="replay"
+        $("#confirmPasswordParent").html("replay");
 
     }
 }
@@ -56,17 +56,17 @@ function checkPhoneNumber(str)
 {
     if(str.length == 10)
     {
-        document.getElementById("phoneNumberParent").innerHTML="phone"
-        return
+        $("#phoneNumberParent").html("phone");
+        return;
     }
     else if(str.length == 0)
     {
-        document.getElementById("phoneNumberParent").innerHTML="phone"
-       return 
+        $("#phoneNumberParent").html("phone");
+       return ;
     }
     else{
-        document.getElementById("phoneNumberParent").innerHTML="call_end"
-        return
+        $("#phoneNumberParent").html("call_end");
+        return;
     }
 }
 

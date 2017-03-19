@@ -41,10 +41,10 @@ session_start();
 			</div>
 		</div>
 		<div class="row">
-			<!-- Put this in loop from here to -->
 			<div class="col s12 m12">
 			<p> Latest in</p>
 			</div>
+			<!-- Put this in loop from here to -->
 			<div class="col s6 m3">
 				<div class="card z-depth-2">
 					<div class="card-image waves-effect waves-block waves-light">

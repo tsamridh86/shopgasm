@@ -8,3 +8,13 @@
 	margin-top: 0px;
 	padding-top: 0px;
 }
+
+.hidden
+{
+	display: none;
+}
+
+.shiftRight
+{
+	padding-left :40px;
+}
