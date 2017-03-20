@@ -5,9 +5,7 @@
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<link rel="stylesheet" href="css/materialize.min.css">
-		<link rel="stylesheet" href="css/nouislider.css">
 		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-		<script type="text/javascript" src="js/nouislider.js"></script>
 		<script type="text/javascript" src="js/materialize.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -50,8 +48,8 @@
 			<li class="shiftRight"><input type="checkbox" id = "brand3" value="brand3" /><label for="brand3">Brand 3</label></li>
 			<li class="shiftRight"><input type="checkbox" id = "brand4" value="brand4" /><label for="brand4">Brand 4</label></li>
 			</form>
-			<li><a href="#!">Second Link</a></li>
 			<li><div class="divider"></div></li>
+			<li><a id="priceClick"><i class="fa fa-inr fa-2x"></i>Filter by Price<i id="brandArrow" class="fa fa-sort-down right"></i></a></li>
 			<li><a class="subheader">Subheader</a></li>
 			<li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
 		</ul>

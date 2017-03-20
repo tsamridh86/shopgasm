@@ -8,3 +8,5 @@ $("#brandClick").click(function(){
 	else
 		$("#brandArrow").removeClass().addClass("fa fa-sort-down right")
 });
+
+
