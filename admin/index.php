@@ -19,13 +19,13 @@
 				<a href="#" class="brand-logo">Welcome, Admin</a>
 				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li><a href="#">View All Orders</a></li>
-					<li><a href="#">View All Users</a></li>
+					<li><a href="#allOrders">View All Orders</a></li>
+					<li><a href="#allUsers">View All Users</a></li>
 					<li><a href="#">Logout</a></li>
 				</ul>
 				<ul class="side-nav" id="mobile-demo">
-					<li><a href="#">View All Orders</a></li>
-					<li><a href="#">View All Users</a></li>
+					<li><a href="#allOrders">View All Orders</a></li>
+					<li><a href="#allUsers">View All Users</a></li>
 					<li><a href="#">Logout</a></li>
 				</ul>
 			</div>
@@ -173,6 +173,92 @@
 			</div>
 			<!-- till here -->
 		</div>	
+		</div>
+		<!-- all orders modal -->
+		<div id="allOrders" class="modal">
+			<div class="modal-content">
+				<p><h4>All Users</h4></p>
+				<table>
+					<thead>
+						<tr>
+							<th data-field="orderId">Order Id</th>
+							<th data-field="userName">Customer</th>
+							<th data-field="phoneNumber">Phone Number</th>
+							<th data-field="address">Address</th>
+							<th data-field="total">Total</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td>userName</td>
+							<td>0123456789</td>
+							<td>somewhere</td>
+							<td>150</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>userName</td>
+							<td>0123456789</td>
+							<td>somewhere</td>
+							<td>150</td>
+						</tr>
+						<tr>
+							<td>1</td>
+							<td>userName</td>
+							<td>0123456789</td>
+							<td>somewhere</td>
+							<td>150</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+			</div>
+		</div>
+		<!-- all users modal -->
+		<div id="allUsers" class="modal">
+			<div class="modal-content">
+				<p><h4>All Users</h4></p>
+				<table>
+					<thead>
+						<tr>
+							<th data-field="userName">User Name</th>
+							<th data-field="firstName">First Name</th>
+							<th data-field="lastName">Last Name</th>
+							<th data-field="phoneNumber">Phone Number</th>
+							<th data-field="address">Address</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>userName</td>
+							<td>firstName</td>
+							<td>lastName</td>
+							<td>0123456789</td>
+							<td>somewhere</td>
+						</tr>
+						<tr>
+							<td>userName</td>
+							<td>firstName</td>
+							<td>lastName</td>
+							<td>0123456789</td>
+							<td>somewhere</td>
+						</tr>
+						<tr>
+							<td>userName</td>
+							<td>firstName</td>
+							<td>lastName</td>
+							<td>0123456789</td>
+							<td>somewhere</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal-footer">
+				<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+			</div>
 		</div>
 	</body>
 	<script type="text/javascript" src="../js/admin.js"></script>
