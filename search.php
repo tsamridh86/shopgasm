@@ -50,6 +50,12 @@
 			</form>
 			<li><div class="divider"></div></li>
 			<li><a id="priceClick"><i class="fa fa-inr fa-2x"></i>Filter by Price<i id="brandArrow" class="fa fa-sort-down right"></i></a></li>
+			<form class="hidden" id="brandCollection">
+			<li class="shiftRight"><input type="checkbox" id = "range1" value="brand1" /><label for="range1">0 - 1000</label></li>
+			<li class="shiftRight"><input type="checkbox" id = "range2" value="brand2" /><label for="range2">1001 - 2000</label></li>
+			<li class="shiftRight"><input type="checkbox" id = "range3" value="brand3" /><label for="range3">2001 - 3000</label></li>
+			<li class="shiftRight"><input type="checkbox" id = "range4" value="brand4" /><label for="range4">3001 - 4000</label></li>
+			</form>
 			<li><a class="subheader">Subheader</a></li>
 			<li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
 		</ul>
