@@ -46,5 +46,32 @@ class Users{
 		}
 	}
 
+	
+
 }	
+class Admin{
+	public function __construct($conn)
+	{
+		$this->conn=$conn;
+	}
+
+	public function isProduct($name, $brand){
+		$query3 = "SELECT * FROM products WHERE name = '$name' and brand = '$brand'";
+		$result = $this->conn->query($query3);
+
+		if($result->num_rows === 0)
+			return 1;
+		else
+			return -1;
+	}
+
+	public function addProduct($name, $brand, $price, $category, $quantity, $productImg){
+
+		$query3 = "INSERT INTO products (name, brand, image, price, quantity, category) VALUES ('$name', '$brand', '$productImg', '$price', '$quantity', '$category')";
+		if($this->conn->query($query3))
+			return true;
+		else
+			return false;
+	}
+}
 ?>

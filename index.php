@@ -155,37 +155,54 @@ session_start();
 			</div>
 		</div>
 		<!-- This is the cart modal -->
-		<div id="cartModal" class="modal">
-			<div class="modal-content">
-				<p><h4>Your Cart</h4></p>
-				<table>
-					<thead>
-						<tr>
-							<th data-field="name">Item Name</th>
-							<th data-field="price">Item Price</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>Eclair</td>
-							<td>$0.87<i class="material-icons right">delete</i></td>
-						</tr>
-						<tr>
-							<td>Jellybean</td>
-							<td>$3.76<i class="material-icons right">delete</i></td>
-						</tr>
-						<tr>
-							<td>Lollipop</td>
-							<td>$7.00<i class="material-icons right">delete</i></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="modal-footer">
-				<a href="#!"  id="uploadFile" class=" modal-action modal-close waves-effect waves-green btn-flat">Checkout</a>
-				<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
-			</div>
-		</div>
+		<?php
+			if(isset($_SESSION["userName"]))
+			{
+				echo '<div id="cartModal" class="modal">
+						<div class="modal-content">
+							<p><h4>Your Cart</h4></p>
+							<table>
+								<thead>
+									<tr>
+										<th data-field="name">Item Name</th>
+										<th data-field="price">Item Price</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Eclair</td>
+										<td>$0.87<i class="material-icons right">delete</i></td>
+									</tr>
+									<tr>
+										<td>Jellybean</td>
+										<td>$3.76<i class="material-icons right">delete</i></td>
+									</tr>
+									<tr>
+										<td>Lollipop</td>
+										<td>$7.00<i class="material-icons right">delete</i></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="modal-footer">
+							<a href="#!"  id="uploadFile" class=" modal-action modal-close waves-effect waves-green btn-flat">Checkout</a>
+							<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+						</div>
+					</div>';
+			}
+			else
+			{
+				echo '<div id = "cartModal" class = "modal">
+						<div class = "modal-content">
+							<p>Please Login.</p>
+						</div>
+						<div id = "modal-footer">
+							<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat right">Close</a>
+						</div>
+					  </div>';	
+			}
+		?>
+		
 	</body>
 	<script type="text/javascript" src="js/index.js"></script>
 </html>

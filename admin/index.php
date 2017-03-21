@@ -46,33 +46,33 @@
 				</div>
 			</div>
 			<div class="row">
-				<form class="col s12">
+				<form id="addForm" class="col s12" method="post" enctype="multipart/form-data">
 					<div class="row">
 						<div class="input-field col s12 m6">
-							<input id="brand" type="text" class="validate">
+							<input id="brand" type="text" class="validate" required>
 							<label for="brand">Brand Name</label>
 						</div>
 						<div class="input-field col s12 m6">
-							<input id="name" type="text" class="validate">
+							<input id="name" type="text" class="validate" required>
 							<label for="name">Product Name</label>
 						</div>
 						<div class="input-field col s12 m6">
-							<input id="price" type="number" class="validate">
+							<input id="price" type="number" class="validate" required>
 							<label for="price">Price</label>
 						</div>
 						<div class="input-field col s12 m6">
-							<input id="quantity" type="number" class="validate">
+							<input id="quantity" type="number" class="validate" required>
 							<label for="quantity">Quantity Available</label>
 						</div>
 						<div class="input-field col s12 m6">
-							<input id="category" type="text" class="validate">
+							<input id="category" type="text" class="validate" required>
 							<label for="category">Category</label>
 						</div>
 						<div class="input-field col s12 m6">
 							<div class="file-field input-field">
 								<div class="btn">
 									<span>File</span>
-									<input type="file">
+									<input id="productImg" type="file" required>
 								</div>
 								<div class="file-path-wrapper">
 									<input class="file-path validate" type="text" placeholder="Upload a picture">
@@ -80,7 +80,7 @@
 							</div>
 						</div>
 					</div>
-					<button class="btn waves-effect waves-light" type="submit" name="action">Add
+					<button id="addProduct" class="btn waves-effect waves-light" name="action">Add
 					<i class="material-icons right">add</i>
 					</button>
 				</form>
