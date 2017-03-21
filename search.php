@@ -41,7 +41,8 @@
 		</div>
 		<ul id="slide-out" class="side-nav">
 			<li><a><i class="fa fa-filter fa-3x" aria-hidden="true"></i>Filter Products</a></li>
-			<li><a id="brandClick"><i class="fa fa-star fa-2x"></i>Filter by Brand<i id="brandArrow" class="fa fa-sort-down right"></i></a></li>
+			<li><div class="divider"></div></li>
+			<li><a id="brandClick" class="waves-effect"><i class="fa fa-star fa-2x"></i>Filter by Brand<i id="brandArrow" class="fa fa-sort-down right"></i></a></li>
 			<form class="hidden" id="brandCollection">
 			<li class="shiftRight"><input type="checkbox" id = "brand1" value="brand1" /><label for="brand1">Brand 1</label></li>
 			<li class="shiftRight"><input type="checkbox" id = "brand2" value="brand2" /><label for="brand2">Brand 2</label></li>
@@ -49,16 +50,42 @@
 			<li class="shiftRight"><input type="checkbox" id = "brand4" value="brand4" /><label for="brand4">Brand 4</label></li>
 			</form>
 			<li><div class="divider"></div></li>
-			<li><a id="priceClick"><i class="fa fa-inr fa-2x"></i>Filter by Price<i id="brandArrow" class="fa fa-sort-down right"></i></a></li>
-			<form class="hidden" id="brandCollection">
-			<li class="shiftRight"><input type="checkbox" id = "range1" value="brand1" /><label for="range1">0 - 1000</label></li>
-			<li class="shiftRight"><input type="checkbox" id = "range2" value="brand2" /><label for="range2">1001 - 2000</label></li>
-			<li class="shiftRight"><input type="checkbox" id = "range3" value="brand3" /><label for="range3">2001 - 3000</label></li>
-			<li class="shiftRight"><input type="checkbox" id = "range4" value="brand4" /><label for="range4">3001 - 4000</label></li>
+			<li><a id="priceClick" class="waves-effect"><i class="fa fa-inr fa-2x"></i>Filter by Price<i id="priceArrow" class="fa fa-sort-down right"></i></a></li>
+			<form class="hidden" id="priceCollection">
+			<li class="shiftRight"><input type="checkbox" id = "range1" value="range1" /><label for="range1">0 - 1000</label></li>
+			<li class="shiftRight"><input type="checkbox" id = "range2" value="range2" /><label for="range2">1001 - 2000</label></li>
+			<li class="shiftRight"><input type="checkbox" id = "range3" value="range3" /><label for="range3">2001 - 3000</label></li>
+			<li class="shiftRight"><input type="checkbox" id = "range4" value="range4" /><label for="range4">3001 - 4000</label></li>
 			</form>
-			<li><a class="subheader">Subheader</a></li>
-			<li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+			<li><div class="divider"></div></li>
+			<li><a id="categoryClick" class="waves-effect"><i class="material-icons">view_week</i>Filter by Category<i id="categoryArrow" class="fa fa-sort-down right"></i></a></li>
+			<form class="hidden" id="categoryCollection">
+			<li class="shiftRight"><input type="checkbox" id = "category1" value="category1" /><label for="category1">Category 1</label></li>
+			<li class="shiftRight"><input type="checkbox" id = "category2" value="category2" /><label for="category2">Category 2</label></li>
+			<li class="shiftRight"><input type="checkbox" id = "category3" value="category3" /><label for="category3">Category 3</label></li>
+			<li class="shiftRight"><input type="checkbox" id = "category4" value="category4" /><label for="category4">Category 4</label></li>
+			</form>
 		</ul>
+		<div class="row">
+		<!-- Put this in loop from here to -->
+			<div class="col s6 m3">
+				<div class="card z-depth-2">
+					<div class="card-image waves-effect waves-block waves-light">
+						<img class="activator" src="images/lauda_lassan.jpg">
+					</div>
+					<div class="card-content">
+						<span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
+						<p><a href="#">This is a link</a></p>
+					</div>
+					<div class="card-reveal">
+						<span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
+						<p>Here is some more information about this product that is only revealed once clicked on.</p>
+					</div>
+				</div>
+			</div>
+			<!-- till here -->
+			
+		</div>
 	</body>
 	<script type="text/javascript" src="js/search.js"></script>
 </html>
