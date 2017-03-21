@@ -69,6 +69,17 @@ class Admin{
 			return -1;
 	}
 
+	public function isProductId($id)
+	{
+		$query3 = "SELECT * FROM products WHERE productId = '$id'";
+		$result = $this->conn->query($query3);
+
+		if($result->num_rows === 0)
+			return 1;
+		else
+			return -1;
+	}
+
 	public function addProduct($name, $brand, $price, $category, $quantity, $productImg){
 
 		$query3 = "INSERT INTO products (name, brand, image, price, quantity, category) VALUES ('$name', '$brand', '$productImg', '$price', '$quantity', '$category')";
@@ -77,11 +88,33 @@ class Admin{
 		else
 			return false;
 	}
+
 	public function logout()
 	{
 		unset($_SESSION['admin']);
 	 	session_destroy();
 	 	echo "<script type='text/javascript'>alert('Succesfully Logout');window.location.href = '../index.php';</script>";
 	}
+
+	public function getLastestId ()
+    {
+      $id = $this->conn->query("select max(productId) as max from products");
+      $id = $id->fetch_assoc();
+      $id = $id['max'];
+      if($id != NULL) return  $id+1;
+      else return 1;
+    }
+
+
+    public function updateProduct($id, $name, $brand, $productImg, $price, $quantity, $category)
+    {
+    	$query3 = "UPDATE products SET name = '$name', brand = '$brand', image = '$productImg', price = '$price', quantity = '$quantity', category = '$category' WHERE productId = '$id'";
+
+    	if($this->conn->query($query3))
+    		return true;
+    	else
+    		return false;
+    }
+
 }
 ?>
