@@ -80,7 +80,7 @@
 							</div>
 						</div>
 					</div>
-					<button id="addProduct" class="btn waves-effect waves-light" name="action">Add
+					<button id="addProduct" type="submit" class="btn waves-effect waves-light" name="action">Add
 					<i class="material-icons right">add</i>
 					</button>
 				</form>
@@ -89,37 +89,37 @@
 		<div id="update" class="col s12">
 			<h4> <p>Update Existing Product </p></h4>
 			<div class="row">
-				<form class="col s12">
+				<form id="updateForm" class="col s12" method="post" enctype="multipart/form-data">
 					<div class="row">
 						<div class="input-field col s12 m6">
-							<input id="brand" type="number" class="validate">
-							<label for="brand">Product Id to Replace</label>
+							<input id="uproductId" type="number" class="validate">
+							<label for="uproductId">Product Id to Replace</label>
 						</div>
 						<div class="input-field col s12 m6">
-							<input id="brand" type="text" class="validate">
-							<label for="brand">Brand Name</label>
+							<input id="ubrand" type="text" class="validate">
+							<label for="ubrand">Brand Name</label>
 						</div>
 						<div class="input-field col s12 m6">
-							<input id="name" type="text" class="validate">
-							<label for="name">Product Name</label>
+							<input id="uname" type="text" class="validate">
+							<label for="uname">Product Name</label>
 						</div>
 						<div class="input-field col s12 m6">
-							<input id="price" type="number" class="validate">
-							<label for="price">Price</label>
+							<input id="uprice" type="number" class="validate">
+							<label for="uprice">Price</label>
 						</div>
 						<div class="input-field col s12 m6">
-							<input id="quantity" type="number" class="validate">
-							<label for="quantity">Quantity Available</label>
+							<input id="uquantity" type="number" class="validate">
+							<label for="uquantity">Quantity Available</label>
 						</div>
 						<div class="input-field col s12 m6">
-							<input id="category" type="text" class="validate">
-							<label for="category">Category</label>
+							<input id="ucategory" type="text" class="validate">
+							<label for="ucategory">Category</label>
 						</div>
 						<div class="input-field col s12 m6">
 							<div class="file-field input-field">
 								<div class="btn">
 									<span>File</span>
-									<input type="file">
+									<input id="uproductImg" type="file">
 								</div>
 								<div class="file-path-wrapper">
 									<input class="file-path validate" type="text" placeholder="Upload a picture">
@@ -127,7 +127,7 @@
 							</div>
 						</div>
 					</div>
-					<button class="btn waves-effect waves-light" type="submit" name="action">Update
+					<button id="updateProduct" type = "submit" class="btn waves-effect waves-light" name="action">Update
 					<i class="material-icons right">replay</i>
 					</button>
 				</form>
