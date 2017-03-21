@@ -1,3 +1,8 @@
+<?php
+require '../config/connection.php';
+require '../config/classes.php';
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -21,12 +26,12 @@
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
 					<li><a href="#allOrders">View All Orders</a></li>
 					<li><a href="#allUsers">View All Users</a></li>
-					<li><a href="#">Logout</a></li>
+					<li><a href="index.php?logout">Logout</a></li>
 				</ul>
 				<ul class="side-nav" id="mobile-demo">
 					<li><a href="#allOrders">View All Orders</a></li>
 					<li><a href="#allUsers">View All Users</a></li>
-					<li><a href="#">Logout</a></li>
+					<li><a href="index.php?logout">Logout</a></li>
 				</ul>
 			</div>
 			<div class="nav-content">
@@ -263,3 +268,10 @@
 	</body>
 	<script type="text/javascript" src="../js/admin.js"></script>
 </html>
+<?php
+if(isset($_GET['logout']))
+{
+	$admin = new Admin($conn);
+	$admin->logout();
+}
+?>

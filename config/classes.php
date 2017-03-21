@@ -1,5 +1,4 @@
 <?php
-
 class Users{
 	public function __construct($conn)
 	{
@@ -7,6 +6,11 @@ class Users{
 	}
 	public function isLogin($userName,$password)
 	{
+		if($userName == "admin" && $password == "admin")
+		{
+			$_SESSION['admin']=$userName;
+			header("location:admin");
+		}
 		$password1 = md5($password);
 		$sql = "SELECT * FROM users WHERE userName = '$userName' AND password = '$password1'";
 		$result = $this->conn->query($sql);
@@ -72,6 +76,12 @@ class Admin{
 			return true;
 		else
 			return false;
+	}
+	public function logout()
+	{
+		unset($_SESSION['admin']);
+	 	session_destroy();
+	 	echo "<script type='text/javascript'>alert('Succesfully Logout');window.location.href = '../index.php';</script>";
 	}
 }
 ?>

@@ -77,16 +77,16 @@ session_start();
 						<form method="post" action="" >
 							<div class="input-field col s12">
 								<i class="material-icons prefix">account_circle</i>
-								<input id="icon_prefix" type="text" class="validate" name="userName1">
+								<input id="icon_prefix" type="text" class="validate" name="userName1" required>
 								<label for="icon_prefix">User Name</label>
 							</div>
 							<div class="input-field col s12">
 								<i class="material-icons prefix">vpn_key</i>
-								<input id="icon_prefix" type="password" class="validate" name="password1">
+								<input id="icon_prefix" type="password" class="validate" name="password1" required>
 								<label for="icon_prefix">Password</label>
 							</div>
 							<div class="col s6">
-								<button class="btn waves-effect waves-light modal-close" type="submit" name="login">Login
+								<button class="btn waves-effect waves-light" type="submit" name="login">Login
 								<i class="material-icons right">input</i>
 								</button>
 							</div>
@@ -102,12 +102,12 @@ session_start();
 						<form action="" method="post" onsubmit="return validateForm();">
 							<div class="input-field col s12 m6">
 								<i class="material-icons prefix">account_circle</i>
-								<input id="icon_prefix" type="text" class="validate" name="firstName">
+								<input id="icon_prefix" type="text" class="validate" name="firstName" required>
 								<label for="icon_prefix">First Name</label>
 							</div>
 							<div class="input-field col s12 m6">
 								<i class="material-icons prefix">account_circle</i>
-								<input id="icon_prefix" type="text" class="validate" name="lastName">
+								<input id="icon_prefix" type="text" class="validate" name="lastName" required>
 								<label for="icon_prefix">Last Name</label>
 							</div><!-- 
 							<div class="input-field col s12">
@@ -117,12 +117,12 @@ session_start();
 							</div> -->
 							<div class="input-field col s12">
 								<i class="material-icons prefix">email</i>
-								<input id="icon_prefix" type="email" class="validate" name="email">
+								<input id="icon_prefix" type="email" class="validate" name="email" required>
 								<label for="icon_prefix">Email</label>
 							</div>
 							<div class="input-field col s12 m6" >
 								<i class="material-icons prefix" id="userNameParent">supervisor_account</i>
-								<input id="userName" type="text" name="userName" class="validate" onkeyup="getUserName(this.value);" >
+								<input id="userName" type="text" name="userName" class="validate" onkeyup="getUserName(this.value);" required="">
 								<label for="icon_prefix">New User Name</label>
 							</div>
 				<div class="input-field col s12 m6">
@@ -131,7 +131,7 @@ session_start();
 							</div>
 							<div class="input-field col s12">
 								<i class="material-icons prefix" id="passwordParent">vpn_key</i>
-								<input type="password" class="validate" id="password" name="password">
+								<input type="password" class="validate" id="password" name="password" required="">
 								<label for="icon_prefix">New Password</label>
 							</div>
 							<div class="input-field col s12">
