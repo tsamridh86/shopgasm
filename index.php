@@ -32,7 +32,7 @@ session_start();
 						<a class="btn-floating waves-effect waves-light blue z-depth-5 btn tooltipped btn-large" data-position="bottom" data-delay="50" data-tooltip="Search" id="search"><i class="material-icons">search</i></a>
 					</div>
 					<div class="col s6 m1 align-right white-text ">
-						<a class="btn-floating btn-large waves-effect waves-light green z-depth-5 btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Account Settings" href="#accountModal"><i class="material-icons">account_circle</i></a>
+						<a class="btn-floating btn-large waves-effect waves-light green z-depth-5 btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Account Settings" href="#accountModal" id="accountButton"><i class="material-icons">account_circle</i></a>
 					</div>
 					<div class="col s6 m1 align-right white-text ">
 						<a class="btn-floating btn-large waves-effect waves-light amber darken-4 z-depth-5 btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Cart" href="#cartModal"><i class="material-icons">shopping_cart</i></a>
@@ -74,7 +74,7 @@ session_start();
 					</div>
 					<div id="login" class="col s12">
 						<p><h4>Log In</h4></p>
-						<form method="post" action="">
+						<form method="post" action="" >
 							<div class="input-field col s12">
 								<i class="material-icons prefix">account_circle</i>
 								<input id="icon_prefix" type="text" class="validate" name="userName1">
@@ -99,7 +99,7 @@ session_start();
 					</div>
 					<div id="signup" class="col s12">
 						<p><h4>Sign Up</h4></p>
-						<form action="" method="post">
+						<form action="" method="post" onsubmit="return validateForm();">
 							<div class="input-field col s12 m6">
 								<i class="material-icons prefix">account_circle</i>
 								<input id="icon_prefix" type="text" class="validate" name="firstName">
@@ -127,7 +127,7 @@ session_start();
 							</div>
 				<div class="input-field col s12 m6">
 								<i class="material-icons prefix" id="phoneNumberParent">phone</i>
-								<input type="text" class="validate" name="phoneNumber" onkeyup="checkPhoneNumber(this.value);">
+								<input type="text" class="validate" name="phoneNumber" id="phoneNumber" onkeyup="checkPhoneNumber(this.value);">
 							</div>
 							<div class="input-field col s12">
 								<i class="material-icons prefix" id="passwordParent">vpn_key</i>
@@ -140,7 +140,7 @@ session_start();
 								<label for="icon_prefix">Re-type Password</label>
 							</div>
 							<div class="col s6">
-								<button class="btn waves-effect waves-light modal-close" type="submit" name="signUp">Sign Up
+								<button class="btn waves-effect waves-light" type="submit" name="signUp" >Sign Up
 								<i class="material-icons right">call_made</i>
 								</button>
 							</div>
@@ -212,7 +212,7 @@ if($isSignUp === true)
     </div>
   </div>';
 }
-elseif ($isSignuUp == "Username already exists") {
+elseif ($isSignUp == "Username already exists") {
 	echo '
 	<script type="text/javascript">
 					$(document).ready(function(){

@@ -18,7 +18,7 @@ class Users{
 	public function checkUsername($userName){
 		$query2 = "SELECT userName from users where userName = '$userName'";
 		$result2= $this->conn->query($query2);
-		if($result2->num_rows === 0)
+		if($result2->num_rows == 0)
 		{
 			return 1;
 		}
