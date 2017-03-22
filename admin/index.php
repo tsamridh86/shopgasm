@@ -97,34 +97,34 @@ session_start();
 				<form id="updateForm" class="col s12" method="post" enctype="multipart/form-data">
 					<div class="row">
 						<div class="input-field col s12 m6">
-							<input id="uproductId" type="number" class="validate">
+							<input id="uproductId" type="number" class="validate" required>
 							<label for="uproductId">Product Id to Replace</label>
 						</div>
 						<div class="input-field col s12 m6">
-							<input id="ubrand" type="text" class="validate">
+							<input id="ubrand" type="text" class="validate" required>
 							<label for="ubrand">Brand Name</label>
 						</div>
 						<div class="input-field col s12 m6">
-							<input id="uname" type="text" class="validate">
+							<input id="uname" type="text" class="validate" required>
 							<label for="uname">Product Name</label>
 						</div>
 						<div class="input-field col s12 m6">
-							<input id="uprice" type="number" class="validate">
+							<input id="uprice" type="number" class="validate" required>
 							<label for="uprice">Price</label>
 						</div>
 						<div class="input-field col s12 m6">
-							<input id="uquantity" type="number" class="validate">
+							<input id="uquantity" type="number" class="validate" required>
 							<label for="uquantity">Quantity Available</label>
 						</div>
 						<div class="input-field col s12 m6">
-							<input id="ucategory" type="text" class="validate">
+							<input id="ucategory" type="text" class="validate" required>
 							<label for="ucategory">Category</label>
 						</div>
 						<div class="input-field col s12 m6">
 							<div class="file-field input-field">
 								<div class="btn">
 									<span>File</span>
-									<input id="uproductImg" type="file">
+									<input id="uproductImg" type="file" required>
 								</div>
 								<div class="file-path-wrapper">
 									<input class="file-path validate" type="text" placeholder="Upload a picture">
@@ -141,11 +141,11 @@ session_start();
 		<div id="delete" class="col s12">
 			<h4> <p>Delete Existing Product </p></h4>
 			<div class="row">
-				<form class="col s12">
+				<form id="deleteForm" class="col s12" method = "post">
 					<div class="row">
 						<div class="input-field col s12 m6">
-							<input id="brand" type="number" class="validate">
-							<label for="brand">Product Id to Delete</label>
+							<input id="dproductId" type="number" class="validate" required>
+							<label for="dproductId">Product Id to Delete</label>
 						</div>
 					</div>
 					<button class="btn waves-effect waves-light" type="submit" name="action">Delete
