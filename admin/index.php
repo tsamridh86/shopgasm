@@ -2,6 +2,11 @@
 require '../config/connection.php';
 require '../config/classes.php';
 session_start();
+
+$admin = new Admin($conn);
+
+$usersList = $admin->getAllUsers();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -225,6 +230,15 @@ session_start();
 		<!-- all users modal -->
 		<div id="allUsers" class="modal">
 			<div class="modal-content">
+				<?php
+					if($usersList == 0)
+						echo "<p><h5>Error loading Users...</h5></p>";
+					elseif($usersList == -1)
+						echo "<p><h5>No user found...</h5></p>";
+					else
+					{
+
+				?>
 				<p><h4>All Users</h4></p>
 				<table>
 					<thead>
@@ -233,31 +247,23 @@ session_start();
 							<th data-field="firstName">First Name</th>
 							<th data-field="lastName">Last Name</th>
 							<th data-field="phoneNumber">Phone Number</th>
-							<th data-field="address">Address</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>userName</td>
-							<td>firstName</td>
-							<td>lastName</td>
-							<td>0123456789</td>
-							<td>somewhere</td>
-						</tr>
-						<tr>
-							<td>userName</td>
-							<td>firstName</td>
-							<td>lastName</td>
-							<td>0123456789</td>
-							<td>somewhere</td>
-						</tr>
-						<tr>
-							<td>userName</td>
-							<td>firstName</td>
-							<td>lastName</td>
-							<td>0123456789</td>
-							<td>somewhere</td>
-						</tr>
+					<?php
+							$i = 0;
+							while($i < count($usersList)-1)
+							{	
+								echo "<tr>";
+								echo "<td>".$usersList[$i]['userName']."</td>";
+								echo "<td>".$usersList[$i]['firstName']."</td>";
+								echo "<td>".$usersList[$i]['lastName']."</td>";
+								echo "<td>".$usersList[$i]['phoneNo']."</td>";
+								echo "</tr>";
+								$i = $i + 1;
+							}
+						}
+					?>
 					</tbody>
 				</table>
 			</div>
@@ -271,7 +277,6 @@ session_start();
 <?php
 if(isset($_GET['logout']))
 {
-	$admin = new Admin($conn);
 	$admin->logout();
 }
 ?>
