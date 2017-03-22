@@ -48,7 +48,7 @@ session_start();
 			<div class="col s6 m3">
 				<div class="card z-depth-2">
 					<div class="card-image waves-effect waves-block waves-light">
-						<img class="activator" src="images/lauda_lassan.jpg">
+						<img class="activator" src="images/office.jpg" height="300">
 					</div>
 					<div class="card-content">
 						<span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
