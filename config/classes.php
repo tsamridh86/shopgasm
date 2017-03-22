@@ -135,5 +135,43 @@ class Admin{
 
     }
 
+   	public function getAllUsers()
+   	{
+   		$query3 = "SELECT * FROM users";
+   		$result = $this->conn->query($query3);
+   		if($result->num_rows >= 1)
+   		{
+   			$usersList = array('index' => array('userId'=>'',
+   												'userName'=>'',
+   												'password'=>'',
+   												'firstName'=>'',
+   												'lastName'=>'',
+   												'address'=>'',
+   												'phoneNo'=>'',
+   												'email'=>''
+   												 ) );
+
+   			$i = 0;
+   			while($row = $result->fetch_assoc())
+   			{
+   				$usersList[$i]['userId'] = $row['userId'];
+   				$usersList[$i]['userName'] = $row['userName'];
+   				$usersList[$i]['password'] = $row['password'];
+   				$usersList[$i]['firstName'] = $row['firstName'];
+   				$usersList[$i]['lastName'] = $row['lastName'];
+   				$usersList[$i]['address'] = $row['address'];
+   				$usersList[$i]['phoneNo'] = $row['phoneNo'];
+   				$usersList[$i]['email'] = $row['email'];
+   				$i = $i + 1;
+   			}
+
+   			return $usersList;
+   		}
+   		elseif($result->num_rows == 0)
+   			return -1;
+   		else
+   			return 0;
+   	}
+
 }
 ?>
