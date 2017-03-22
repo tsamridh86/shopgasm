@@ -116,5 +116,24 @@ class Admin{
     		return false;
     }
 
+    public function deleteProduct($id)
+    {
+    	$query3 = "DELETE FROM products WHERE productId = '$id'";
+
+    	if($this->conn->query($query3))
+    		return true;
+    	else
+    		return false;
+    }
+
+    public function getImgName($id)
+    {
+    	$query3 = "SELECT image FROM products WHERE productId = '$id'";
+    	$result = $this->conn->query($query3);
+    	$row = $result->fetch_assoc();
+    	return $row;
+
+    }
+
 }
 ?>

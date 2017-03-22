@@ -64,6 +64,29 @@
 				echo "Product updated successfully";
 		}
 	}
+	else if(isset($_POST["req"]) && $_POST["req"]=="del")
+	{
+		$productId = $_POST["productId"];
+
+		$check = $admin->isProductId($productId);
+
+		if($check == 1)
+			echo "Brand with given Product Id does not exist";
+		else
+		{
+			$productImgName = $admin->getImgName($productId);
+			$result = $admin->deleteProduct($productId);
+
+			if(!$result)
+				echo "Sorry something went wrong";
+			else
+			{	
+				$productImgName = $productImgName['image'];
+				unlink("../images/".$productImgName);
+				echo "Record deleted successfully";
+			}
+		}
+	}
 	else
 	{
 

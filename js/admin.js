@@ -52,7 +52,7 @@ $("#addForm").submit(function() {
 	});
 
 
-$("#updateProduct").click(function(){
+$("#updateForm").submit(function(){
 
 		var productId = $("#uproductId").val();
 		var brand = $("#ubrand").val();
@@ -98,5 +98,40 @@ $("#updateProduct").click(function(){
 				console.log(response);
 			}
 		});
+
+});
+
+
+$("#deleteForm").submit(function(){
+
+	var productId = $("#dproductId").val();
+
+	var formData = new FormData();
+	formData.append('productId',productId);
+	formData.append('req','del');
+
+	$.ajax({
+
+			url : "addProduct.php",
+			dataType : 'text',
+			cache : false, 
+			contentType : false,
+			processData : false,
+			data : formData,
+			type : 'post',
+			async : false,
+			success : function(response)
+			{
+				alert(response);
+				console.log("success");
+				console.log(response);
+			},
+			error : function(response)
+			{
+				alert(response);
+				console.log("error");
+				console.log(response);
+			}
+	});
 
 });
