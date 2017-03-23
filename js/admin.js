@@ -2,11 +2,13 @@ $(document).ready(function(){
 	$(".button-collapse").sideNav();
 	$('.modal').modal();
 	
-	
+	// $("#allProductContent").load("getAllProducts.php?start=0")
+
 });
 
 
 $("#addForm").submit(function() {
+
 
 		
 		var brand = $("#brand").val();

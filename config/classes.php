@@ -173,5 +173,54 @@ class Admin{
    			return 0;
    	}
 
+	public function totalProducts()
+	{
+		$query1="SELECT count(productId) as totalProducts from products";
+		$result=$this->conn->query($query1);
+		if($result)
+		{
+			$row=$result->fetch_assoc();
+			return $row['totalProducts'];
+		}
+		else{
+			return false;
+		}
+	}
+	public function getAllProducts($start,$limit){
+		$start=$start-1; //0 index
+		$totalProducts=$this->totalProducts();
+		$total=$start+$limit;
+		if($totalProducts >= $total)
+		{
+
+			$query1="SELECT * FROM products LIMIT $start, $limit";
+		}
+		else{
+
+			$query1="SELECT * FROM products LIMIT $start,$totalProducts";
+
+		}
+		$result= $this->conn->query($query1);
+		if($result)
+		{
+			$i=0;
+			$allProducts=array();
+			while($row=$result->fetch_assoc())
+			{
+				$allProducts[$i]['productId']=$row['productId'];
+				$allProducts[$i]['name']=$row['name'];
+				$allProducts[$i]['brand']=$row['brand'];
+				$allProducts[$i]['image']=$row['image'];
+				$allProducts[$i]['price']=$row['price'];
+				$allProducts[$i]['quantity']=$row['quantity'];
+				$allProducts[$i]['category']=$row['category'];
+				$i=$i+1;
+			}
+			return $allProducts;
+		}
+		else{
+			return "Something went wrong";
+		}
+	}
 }
 ?>

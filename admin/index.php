@@ -7,6 +7,11 @@ $admin = new Admin($conn);
 
 $usersList = $admin->getAllUsers();
 
+$admin = new Admin($conn);
+$totalProducts=$admin->totalProducts();
+$start=1;
+$limit=8;
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,7 +49,7 @@ $usersList = $admin->getAllUsers();
 					<li class="tab"><a class="active" href="#add">Add</a></li>
 					<li class="tab"><a href="#update">Update </a></li>
 					<li class="tab"><a href="#delete">Delete</a></li>
-					<li class="tab"><a href="#all">All </a></li>
+					<li  class="tab"><a id="allButton" href="#all">All </a></li>
 				</ul>
 			</div>
 		</nav>
@@ -161,26 +166,61 @@ $usersList = $admin->getAllUsers();
 		</div>
 		<div id="all" class="col s12">
 		<div class="row">
+		<div class="col s12">
+		<span class="right"><h5>
+		<?php
+		if(!isset($_GET['start']))
+			{
+				$startPage=1;
+			}
+			else{
+				$startPage=$_GET['start'];
+				$start=$startPage;
+				
+			}
+		if($startPage != 1) {?> 
+
+		<a href="index.php?start=<?php echo $_GET['start']-$limit;?>""><i id="previous" class="fa fa-chevron-left fa-2x"  ></a></i><?php }
+		$temp=$startPage+$limit-1;
+		if($temp >$totalProducts)
+			$temp=$totalProducts;
+		echo $startPage;
+		echo "-".$temp;
+		echo " of ".$totalProducts;
+		if((($startPage)+$limit) <=$totalProducts) {?>
+		<a href="index.php?start=<?php echo $start+$limit;?>"><i id="next" class="fa fa-chevron-right fa-2x" ></i></a><?php 
+			}?></h5></span>
+		</div>
 			<!-- Put this in loop -->
-			<div class="col s6 m3">
-				<div class="card z-depth-2">
-					<div class="card-image waves-effect waves-block waves-light">
-						<img class="activator" src="../images/office.jpg">
-					</div>
-					<div class="card-content">
-						<span class="card-title activator grey-text text-darken-4">Product Name<i class="material-icons right">more_vert</i></span>
-						<p><a href="#">Add to Cart</a></p>
-					</div>
-					<div class="card-reveal">
-						<span class="card-title grey-text text-darken-4">Product Name<i class="material-icons right">close</i></span>
-						<p>Id : 1</p>
-						<p>Sold By: Brand</p>
-						<p>Price : 100</p>
-						<p>Quantity Left: 100</p>
-						<p>Category: Category</p>
-					</div>
-				</div>
-			</div>
+			<?php
+			$allProducts=array();
+			// $startPage=$_GET['start'];
+			$allProducts=$admin->getAllProducts($startPage,$limit);
+			// $allProducts=json_decode($allProducts);
+			// echo $allProducts[1]["productId"];
+			$i=0;
+			while($i < (count($allProducts))){
+						echo '<div class="col s12 m3">'.
+						'<div class="card z-depth-2">'.
+							'<div class="card-image waves-effect waves-block waves-light">'.
+								'<img height="300" class="activator" src="../images/'.$allProducts[$i]['image'].'">'.
+							'</div>'.
+							'<div class="card-content">'.
+								'<span class="card-title activator grey-text text-darken-4">'.$allProducts[$i]['name'].'<i class="material-icons right">more_vert</i></span>'.
+							'</div>'.
+							'<div class="card-reveal">'.
+								'<span class="card-title grey-text text-darken-4">'.$allProducts[$i]['name'].'<i class="material-icons right">close</i></span>'.
+								'<p>Id : '.$allProducts[$i]['productId'].'</p>'.
+								'<p>Sold By: '.$allProducts[$i]['brand'].'</p>'.
+								'<p>Price : '.$allProducts[$i]['price'].'</p>'.
+								'<p>Quantity Left: '.$allProducts[$i]['quantity'].'</p>'.
+								'<p>Category: '.$allProducts[$i]['category'].'</p>'.
+							'</div>'.
+						'</div>'.
+					'</div>';
+					$i=$i+1;
+					}
+				?>
 			<!-- till here -->
 		</div>	
 		</div>
@@ -277,6 +317,17 @@ $usersList = $admin->getAllUsers();
 <?php
 if(isset($_GET['logout']))
 {
+	
 	$admin->logout();
 }
+if(isset($_GET['start']))
+{
+	echo '<script type="text/javascript" >
+	$(document).ready(function(){
+					$("#allButton").trigger("click");
+						});
+	</script>'; 
+}
+
+
 ?>
