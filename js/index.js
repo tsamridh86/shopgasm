@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	$('select').material_select();
 	$('.modal').modal();
+
 	
 });
 function getUserName(str){
@@ -131,4 +132,27 @@ function validateForm()
     else{
         return false;
     }
+}
+function getProducts(str)
+{
+    if(str=="")
+    {
+        document.getElementById('searchResults').innerHTML="";
+        return
+    }
+    var searchedResults,x,txt="";
+          var xhttp=new XMLHttpRequest();
+           xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+        searchedResults=JSON.parse(this.responseText);
+        for(x in searchedResults)
+        {
+            txt += '<a href="search.php?q='+searchedResults[x].name+'"> '+ searchedResults[x].name+'<br></a>';
+        }
+            document.getElementById("searchResults").innerHTML=txt;
+        
+        }
+    };
+    xhttp.open("GET", "search.php?suggest=" + str, true);
+xhttp.send();
 }

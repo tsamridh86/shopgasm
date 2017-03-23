@@ -13,6 +13,7 @@ session_start();
 		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 		<script type="text/javascript" src="js/materialize.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<script type="text/javascript" src="js/index.js"></script>
 		<!-- The place where the css is  -->
 		<link rel="stylesheet" type="text/css" href="css/index.css">
 		<title> Welcome to Shopgasm!</title>
@@ -25,11 +26,14 @@ session_start();
 						<span class="card-title white-text shiftDown">Shopgasm</span>
 					</div>
 					<div class="input-field col s10 m6">
-						<input placeholder="Type here" id="query" name = "q" type="text" class="validate white-text">
+						<input placeholder="Type here" id="query" name = "q" type="text" onkeyup="getProducts(this.value);" class="validate white-text">
 						<label for="query" class="white-text">What are you looking for today?</label>
+         			 <div id="searchResults" color:red"></div>
+
 					</div>
 					<div class="col s1 m1">
 						<a  class="btn-floating waves-effect waves-light blue z-depth-5 btn tooltipped btn-large" data-position="bottom" data-delay="50" data-tooltip="Search" id="search"><i class="material-icons">search</i></a>
+
 					</div>
 					<div class="col s6 m1 align-right white-text ">
 						<a class="btn-floating btn-large waves-effect waves-light green z-depth-5 btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Account Settings" href="#accountModal" id="accountButton"><i class="material-icons">account_circle</i></a>
@@ -204,7 +208,6 @@ session_start();
 		?>
 		
 	</body>
-	<script type="text/javascript" src="js/index.js"></script>
 </html>
 <?php
 $user = new Users($conn);

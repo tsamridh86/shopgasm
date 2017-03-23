@@ -100,9 +100,28 @@ class Users{
 			}
 	}		
 
-	
+	public function suggestProducts($str,$limit)
+	{
+		$query1="SELECT *  from products WHERE ((name LIKE '%$str%') OR (category LIKE '%$str%')) LIMIT $limit";
+		$result= $this->conn->query($query1);
+		if($result)
+		{
+			$i=0;
+				$allProducts=array();
+				while($row=$result->fetch_assoc())
+				{
+					$allProducts[$i]['name']=$row['name'];
+					$i=$i+1;
+				}
+				$allProducts=json_encode($allProducts);
+				return $allProducts;
+			}
+			else{
+				return "Something went wrong";
+			}
+		}	
+	}
 
-}	
 class Admin{
 	public function __construct($conn)
 	{

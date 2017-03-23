@@ -5,8 +5,16 @@ session_start();
 $user=new Users($conn);
 $start=1;
 $limit=1;
+$limitSuggest=5;
+if(isset($_GET['suggest']))
+{
+	$suggestedProducts=$user->suggestProducts($_GET['suggest'],$limitSuggest);
+	echo $suggestedProducts;
+	exit();
+}
 $totalProducts=$user->countSearchProducts($_GET['q']);
 $query=$_GET['q'];
+
 ?>
 <!DOCTYPE html>
 <html>
