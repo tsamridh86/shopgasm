@@ -49,6 +49,56 @@ class Users{
 		}
 		}
 	}
+	public function countSearchProducts($str)
+	{
+		$query1="SELECT count(productId) as totalProducts from products WHERE ((name LIKE '%$str%') OR (category LIKE '%$str%'))";
+		$result=$this->conn->query($query1);
+		if($result)
+		{
+			$row=$result->fetch_assoc();
+			return $row['totalProducts'];
+		}
+		else{
+			return false;
+		}
+
+	}
+	public function searchProducts($str,$start,$limit)
+	{
+		$start=$start-1;
+		$totalProducts=$this->countSearchProducts($str);
+		$total=$start+$limit;
+		if($totalProducts >= $total)
+		{
+		
+		$query1="SELECT *  from products WHERE ((name LIKE '%$str%') OR (category LIKE '%$str%')) LIMIT $start,$limit";
+
+		}
+		else{
+		$query1="SELECT *  from products WHERE ((name LIKE '%$str%') OR (category LIKE '%$str%')) LIMIT $start,$totalProducts";
+		}
+		$result= $this->conn->query($query1);
+			if($result)
+			{
+				$i=0;
+				$allProducts=array();
+				while($row=$result->fetch_assoc())
+				{
+					$allProducts[$i]['productId']=$row['productId'];
+					$allProducts[$i]['name']=$row['name'];
+					$allProducts[$i]['brand']=$row['brand'];
+					$allProducts[$i]['image']=$row['image'];
+					$allProducts[$i]['price']=$row['price'];
+					$allProducts[$i]['quantity']=$row['quantity'];
+					$allProducts[$i]['category']=$row['category'];
+					$i=$i+1;
+				}
+				return $allProducts;
+			}
+			else{
+				return "Something went wrong";
+			}
+	}		
 
 	
 

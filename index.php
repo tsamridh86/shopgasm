@@ -29,7 +29,7 @@ session_start();
 						<label for="query" class="white-text">What are you looking for today?</label>
 					</div>
 					<div class="col s1 m1">
-						<a class="btn-floating waves-effect waves-light blue z-depth-5 btn tooltipped btn-large" data-position="bottom" data-delay="50" data-tooltip="Search" id="search"><i class="material-icons">search</i></a>
+						<a  class="btn-floating waves-effect waves-light blue z-depth-5 btn tooltipped btn-large" data-position="bottom" data-delay="50" data-tooltip="Search" id="search"><i class="material-icons">search</i></a>
 					</div>
 					<div class="col s6 m1 align-right white-text ">
 						<a class="btn-floating btn-large waves-effect waves-light green z-depth-5 btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Account Settings" href="#accountModal" id="accountButton"><i class="material-icons">account_circle</i></a>

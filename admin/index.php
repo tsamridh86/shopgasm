@@ -7,7 +7,6 @@ $admin = new Admin($conn);
 
 $usersList = $admin->getAllUsers();
 
-$admin = new Admin($conn);
 $totalProducts=$admin->totalProducts();
 $start=1;
 $limit=8;

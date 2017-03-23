@@ -1,3 +1,13 @@
+<?php
+require 'config/connection.php';
+require 'config/classes.php';
+session_start();
+$user=new Users($conn);
+$start=1;
+$limit=1;
+$totalProducts=$user->countSearchProducts($_GET['q']);
+$query=$_GET['q'];
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -66,23 +76,64 @@
 			<li class="shiftRight"><input type="checkbox" id = "category4" value="category4" /><label for="category4">Category 4</label></li>
 			</form>
 		</ul>
+
 		<div class="row">
+		<div class="col s12">
+		<span class="right"><h5>
 		<!-- Put this in loop from here to -->
-			<div class="col s6 m3">
-				<div class="card z-depth-2">
-					<div class="card-image waves-effect waves-block waves-light">
-						<img class="activator" src="images/va_so.jpg">
-					</div>
-					<div class="card-content">
-						<span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-						<p><a href="#">This is a link</a></p>
-					</div>
-					<div class="card-reveal">
-						<span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-						<p>Here is some more information about this product that is only revealed once clicked on.</p>
-					</div>
-				</div>
-			</div>
+		<?php
+		if(!isset($_GET['start']))
+			{
+				$startPage=1;
+			}
+			else{
+				$startPage=$_GET['start'];
+				$start=$startPage;
+				
+			}
+			if($startPage != 1) {?> 
+
+		<a href="search.php?q=<?php echo $query?>&start=<?php echo $_GET['start']-$limit;?>""><i id="previous" class="fa fa-chevron-left fa-2x"  ></a></i><?php }
+		$temp=$startPage+$limit-1;
+		if($temp >$totalProducts)
+			$temp=$totalProducts;
+		echo $startPage;
+		echo "-".$temp;
+		echo " of ".$totalProducts;
+		if((($startPage)+$limit) <=$totalProducts) {?>
+		<a href="search.php?q=<?php echo $query?>&start=<?php echo $start+$limit;?>"><i id="next" class="fa fa-chevron-right fa-2x" ></i></a><?php 
+			}?></h5></span>
+		</div>
+			<?php
+			$allProducts=array();
+			// $startPage=$_GET['start'];
+			$allProducts=$user->searchProducts($_GET['q'],$startPage,$limit);
+			// $allProducts=json_decode($allProducts);
+			echo $allProducts[0]["productId"];
+			$i=0;
+			while($i < (count($allProducts))){
+						echo '<div class="col s12 m3">'.
+						'<div class="card z-depth-2">'.
+							'<div class="card-image waves-effect waves-block waves-light">'.
+								'<img height="300" class="activator" src="images/'.$allProducts[$i]['image'].'">'.
+							'</div>'.
+							'<div class="card-content">'.
+								'<span class="card-title activator grey-text text-darken-4">'.$allProducts[$i]['name'].'<i class="material-icons right">more_vert</i></span>'.
+							'</div>'.
+							'<div class="card-reveal">'.
+								'<span class="card-title grey-text text-darken-4">'.$allProducts[$i]['name'].'<i class="material-icons right">close</i></span>'.
+								'<p>Id : '.$allProducts[$i]['productId'].'</p>'.
+								'<p>Sold By: '.$allProducts[$i]['brand'].'</p>'.
+								'<p>Price : '.$allProducts[$i]['price'].'</p>'.
+								'<p>Quantity Left: '.$allProducts[$i]['quantity'].'</p>'.
+								'<p>Category: '.$allProducts[$i]['category'].'</p>'.
+							'</div>'.
+						'</div>'.
+					'</div>';
+					$i=$i+1;
+					}
+				?>
+			
 			<!-- till here -->
 			
 		</div>
