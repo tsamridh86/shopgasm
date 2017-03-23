@@ -146,7 +146,6 @@ class Admin{
    												'password'=>'',
    												'firstName'=>'',
    												'lastName'=>'',
-   												'address'=>'',
    												'phoneNo'=>'',
    												'email'=>''
    												 ) );
@@ -159,7 +158,6 @@ class Admin{
    				$usersList[$i]['password'] = $row['password'];
    				$usersList[$i]['firstName'] = $row['firstName'];
    				$usersList[$i]['lastName'] = $row['lastName'];
-   				$usersList[$i]['address'] = $row['address'];
    				$usersList[$i]['phoneNo'] = $row['phoneNo'];
    				$usersList[$i]['email'] = $row['email'];
    				$i = $i + 1;
