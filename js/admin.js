@@ -2,8 +2,10 @@ $(document).ready(function(){
 	$(".button-collapse").sideNav();
 	$('.modal').modal();
 	
-	
+	// $("#allProductContent").load("getAllProducts.php?start=0")
+
 });
+
 
 
 $("#addProduct").click(function() {
