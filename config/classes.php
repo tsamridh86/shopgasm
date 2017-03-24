@@ -4,6 +4,12 @@ class Users{
 	{
 		$this->conn=$conn;
 	}
+	public function logout()
+	{
+		unset($_SESSION['userName']);
+	 	session_destroy();
+	 	echo "<script type='text/javascript'>alert('Succesfully Logout');window.location.href = 'index.php';</script>";
+	}
 	public function isLogin($userName,$password)
 	{
 		if($userName == "admin" && $password == "admin")
@@ -48,6 +54,18 @@ class Users{
 			return "Soory something went wrong";
 		}
 		}
+	}
+
+	public function getUserByUserName($userName)
+	{
+		$query3 = "SELECT * FROM users WHERE userName = '$userName'";
+
+		$result = $this->conn->query($query3);
+
+		if($result->num_rows >= 0)
+			return $result->fetch_assoc();
+		else
+			return "No user found";
 	}
 
 	
