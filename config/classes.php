@@ -1,5 +1,6 @@
 <?php
 class Users{
+	private $gradientFactor = 8;
 	public function __construct($conn)
 	{
 		$this->conn=$conn;
@@ -136,9 +137,54 @@ class Users{
 		else
 			return "No user found";
 	}
-}
-	
 
+	public function getAllBrands()
+	{
+		$i =0;
+		$queryb = "select distinct(brand) as brands from products";
+		$result = $this->conn->query($queryb);
+		while($row = $result->fetch_assoc() )
+			{
+				$output[$i] = $row['brands'];
+				$i=$i+1;
+			}
+		return $output;
+	}
+	
+	public function getAllCategory()
+	{
+		$i =0;
+		$queryb = "select distinct(category) as category from products";
+		$result = $this->conn->query($queryb);
+		while($row = $result->fetch_assoc() )
+			{
+				$output[$i] = $row['category'];
+				$i=$i+1;
+			}
+		return $output;
+	}
+
+	public function getCheapestProduct()
+	{
+		$query = "select min(price) as cheap from products";
+		$result = $this->conn->query($query);
+		$row = $result->fetch_assoc();
+		return $row['cheap'];
+	}
+
+	public function getExpensiveProduct()
+	{
+		$query = "select max(price) as expensive from products";
+		$result = $this->conn->query($query);
+		$row = $result->fetch_assoc();
+		return $row['expensive'];
+	}
+
+	public function getGradient()
+	{
+		return (($this->getExpensiveProduct() - $this->getCheapestProduct())/$this->gradientFactor);
+	}
+}	
 class Admin{
 	public function __construct($conn)
 	{

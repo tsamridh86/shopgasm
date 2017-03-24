@@ -10,7 +10,7 @@ $usersList = $admin->getAllUsers();
 $admin = new Admin($conn);
 $totalProducts=$admin->totalProducts();
 $start=1;
-$limit=8;
+$limit=3;
 
 ?>
 <!DOCTYPE html>
@@ -167,7 +167,7 @@ $limit=8;
 		<div id="all" class="col s12">
 		<div class="row">
 		<div class="col s12">
-		<span class="right"><h5>
+		<span class="right" ><h5>
 		<?php
 		if(!isset($_GET['start']))
 			{
