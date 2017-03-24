@@ -50,6 +50,18 @@ class Users{
 		}
 	}
 
+	public function getAllBrands()
+	{
+		$i =0;
+		$queryb = "select distinct(brand) as brands from products";
+		$result = $this->conn->query($queryb);
+		while($row = $result->fetch_assoc() )
+			{
+				$output[$i] = $row['brands'];
+				$i=$i+1;
+			}
+		return $output;
+	}
 	
 
 }	
