@@ -4,7 +4,7 @@ require 'config/classes.php';
 session_start();
 $user=new Users($conn);
 $start=1;
-$limit=1;
+$limit=5;
 $limitSuggest=5;
 if(isset($_GET['suggest']))
 {

@@ -26,9 +26,9 @@ session_start();
 						<span class="card-title white-text shiftDown">Shopgasm</span>
 					</div>
 					<div class="input-field col s10 m6">
-						<input placeholder="Type here" id="query" name = "q" type="text" onkeyup="getProducts(this.value);" class="validate white-text">
+						<input placeholder="Type here" id="query" name = "q" type="text" onkeyup="getProducts(this.value);" class="validate white-text autocomplete">
 						<label for="query" class="white-text">What are you looking for today?</label>
-         			 <div id="searchResults" color:red"></div>
+         			 <div id="searchResults" class = "deep-orange lighten-3" ></div>
 
 					</div>
 					<div class="col s1 m1">

@@ -18,3 +18,17 @@
 {
 	padding-left :40px;
 }
+#query
+{
+	margin-bottom: 0px;
+}
+
+#searchResults
+{
+	display: block;
+	z-index: 5;
+	margin-top: none;
+	padding-left: 5px;
+}
+
+
