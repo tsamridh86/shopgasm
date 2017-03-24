@@ -3,6 +3,7 @@
 			require 'config/classes.php';
 			$user = new Users($conn);
 			$allBrands = $user->getAllBrands();
+			$allCategory = $user->getAllCategory();
 		?>
 <!DOCTYPE html>
 <html>
@@ -70,10 +71,14 @@
 		<li><div class="divider"></div></li>
 		<li><a id="categoryClick" class="waves-effect"><i class="material-icons">view_week</i>Filter by Category<i id="categoryArrow" class="fa fa-sort-down right"></i></a></li>
 		<form class="hidden" id="categoryCollection">
-		<li class="shiftRight"><input type="checkbox" id = "category1" value="category1" /><label for="category1">Category 1</label></li>
-		<li class="shiftRight"><input type="checkbox" id = "category2" value="category2" /><label for="category2">Category 2</label></li>
-		<li class="shiftRight"><input type="checkbox" id = "category3" value="category3" /><label for="category3">Category 3</label></li>
-		<li class="shiftRight"><input type="checkbox" id = "category4" value="category4" /><label for="category4">Category 4</label></li>
+		<?php 
+		$i = 0;
+		while( $i < count($allCategory))
+		{
+			echo "<li class='shiftRight'><input type='checkbox' id = '".$allCategory[$i]."' value='".$allCategory[$i]."' /><label for='".$allCategory[$i]."'>".$allCategory[$i]."</label></li>";
+			$i=$i+1;
+		}
+		?>
 		</form>
 	</ul>
 	<div class="row">

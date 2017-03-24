@@ -63,7 +63,18 @@ class Users{
 		return $output;
 	}
 	
-
+	public function getAllCategory()
+	{
+		$i =0;
+		$queryb = "select distinct(category) as category from products";
+		$result = $this->conn->query($queryb);
+		while($row = $result->fetch_assoc() )
+			{
+				$output[$i] = $row['category'];
+				$i=$i+1;
+			}
+		return $output;
+	}
 }	
 class Admin{
 	public function __construct($conn)
