@@ -125,7 +125,6 @@ class Users{
 				return "Something went wrong";
 			}
 		}	
-	}
 	public function getUserByUserName($userName)
 	{
 		$query3 = "SELECT * FROM users WHERE userName = '$userName'";
@@ -137,7 +136,7 @@ class Users{
 		else
 			return "No user found";
 	}
-
+}
 	
 
 class Admin{
