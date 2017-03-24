@@ -274,7 +274,7 @@ elseif ($isSignUp == "Username already exists") {
 	// echo $isSignUp;
 }
 else{
-	// echo $isSignUp;
+	// echo $isSignUp;*
 	echo '
 	<script type="text/javascript">
 					$(document).ready(function(){
