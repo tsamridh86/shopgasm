@@ -117,7 +117,7 @@ $query=$_GET['q'];
 			// $startPage=$_GET['start'];
 			$allProducts=$user->searchProducts($_GET['q'],$startPage,$limit);
 			// $allProducts=json_decode($allProducts);
-			echo $allProducts[0]["productId"];
+			// echo $allProducts[0]["productId"];
 			$i=0;
 			while($i < (count($allProducts))){
 						echo '<div class="col s12 m3">'.
