@@ -1,4 +1,5 @@
 <?php
+
 require 'config/connection.php';
 require 'config/classes.php';
 session_start();
@@ -15,6 +16,10 @@ if(isset($_GET['suggest']))
 $totalProducts=$user->countSearchProducts($_GET['q']);
 $query=$_GET['q'];
 
+if(isset($_SESSION['userName']))
+{
+	$row = $user->getUserByUserName($_SESSION['userName']);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -57,6 +62,166 @@ $query=$_GET['q'];
 				</div>
 			</div>
 		</div>
+
+		<!-- This is the signup/ login modal -->
+		<div id="accountModal" class="modal">
+		<?php
+			if(!isset($_SESSION['userName']))
+			{
+		?>
+			<div class="modal-content">
+				<div class="row">
+					<div class="col s12">
+						<ul class="tabs">
+							<li class="tab col s6"><a id="init" href="#login">login</a></li>
+							<li class="tab col s6"><a href="#signup">sign up</a></li>
+						</ul>
+					</div>
+					<div id="login" class="col s12">
+						<p><h4>Log In</h4></p>
+						<form method="post" action="" >
+							<div class="input-field col s12">
+								<i class="material-icons prefix">account_circle</i>
+								<input id="icon_prefix" type="text" class="validate" name="userName1" required>
+								<label for="icon_prefix">User Name</label>
+							</div>
+							<div class="input-field col s12">
+								<i class="material-icons prefix">vpn_key</i>
+								<input id="icon_prefix" type="password" class="validate" name="password1" required>
+								<label for="icon_prefix">Password</label>
+							</div>
+							<div class="col s6">
+								<button class="btn waves-effect waves-light" type="submit" name="login">Login
+								<i class="material-icons right">input</i>
+								</button>
+							</div>
+							<div class="col s6 align-right">
+								<button class="btn waves-effect waves-light modal-close" >Cancel
+								<i class="material-icons right">not_interested</i>
+								</button>
+							</div>
+						</form>
+					</div>
+					<div id="signup" class="col s12">
+						<p><h4>Sign Up</h4></p>
+						<form action="" method="post" onsubmit="return validateForm();">
+							<div class="input-field col s12 m6">
+								<i class="material-icons prefix">account_circle</i>
+								<input id="icon_prefix" type="text" class="validate" name="firstName" required>
+								<label for="icon_prefix">First Name</label>
+							</div>
+							<div class="input-field col s12 m6">
+								<i class="material-icons prefix">account_circle</i>
+								<input id="icon_prefix" type="text" class="validate" name="lastName" required>
+								<label for="icon_prefix">Last Name</label>
+							</div><!-- 
+							<div class="input-field col s12">
+								<i class="material-icons prefix">home</i>
+								<input id="icon_prefix" type="text" class="validate" name="address">
+								<label for="icon_prefix">Address</label>
+							</div> -->
+							<div class="input-field col s12">
+								<i class="material-icons prefix">email</i>
+								<input id="icon_prefix" type="email" class="validate" name="email" required>
+								<label for="icon_prefix">Email</label>
+							</div>
+							<div class="input-field col s12 m6" >
+								<i class="material-icons prefix" id="userNameParent">supervisor_account</i>
+								<input id="userName" type="text" name="userName" class="validate" onkeyup="getUserName(this.value);" required="">
+								<label for="icon_prefix">New User Name</label>
+							</div>
+							<div class="input-field col s12 m6">
+								<i class="material-icons prefix" id="phoneNumberParent">phone</i>
+								<input type="text" class="validate" name="phoneNumber" id="phoneNumber" onkeyup="checkPhoneNumber(this.value);">
+							</div>
+							<div class="input-field col s12">
+								<i class="material-icons prefix" id="passwordParent">vpn_key</i>
+								<input type="password" class="validate" id="password" name="password" required="">
+								<label for="icon_prefix">New Password</label>
+							</div>
+							<div class="input-field col s12">
+								<i class="material-icons prefix" id="confirmPasswordParent">replay</i>
+								<input id="confirmPassword" type="password" class="validate" onkeyup="checkPassword(this.value);">
+								<label for="icon_prefix">Re-type Password</label>
+							</div>
+							<div class="col s6">
+								<button class="btn waves-effect waves-light" type="submit" name="signUp" >Sign Up
+								<i class="material-icons right">call_made</i>
+								</button>
+							</div>
+							<div class="col s6 align-right">
+								<button class="btn waves-effect waves-light modal-close" >Cancel
+								<i class="material-icons right">not_interested</i>
+								</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+		<?php
+			}
+			else
+			{
+			echo "<div class = 'modal-content'>";
+			echo "<p>Hi ".$row['firstName']."</p>";
+			echo "</div>";
+
+			echo "<div class = 'model-footer'>";
+				echo "<a href='index.php?logout' class=' modal-action modal-close waves-effect waves-green btn-flat right'>Logout</a>";
+				echo "<a href='#!' class = 'modal-action modal-close waves-effect waves-green btn-flat right'>Close</a>";
+			echo "</div>";
+			}	
+			echo "</div>";
+		echo "<!-- This is the cart modal -->";
+			if(isset($_SESSION["userName"]))
+			{
+				echo '<div id="cartModal" class="modal">
+						<div class="modal-content">
+							<p><h4>Your Cart</h4></p>
+							<table>
+								<thead>
+									<tr>
+										<th data-field="name">Item Name</th>
+										<th data-field="price">Item Price</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Eclair</td>
+										<td>$0.87<i class="material-icons right">delete</i></td>
+									</tr>
+									<tr>
+										<td>Jellybean</td>
+										<td>$3.76<i class="material-icons right">delete</i></td>
+									</tr>
+									<tr>
+										<td>Lollipop</td>
+										<td>$7.00<i class="material-icons right">delete</i></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="modal-footer">
+							<a href="#!"  id="uploadFile" class=" modal-action modal-close waves-effect waves-green btn-flat">Checkout</a>
+							<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+						</div>
+					</div>';
+			}
+			else
+			{
+				echo '<div id = "cartModal" class = "modal">
+						<div class = "modal-content">
+							<p>Please Login.</p>
+						</div>
+						<div id = "modal-footer">
+							<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat right">Close</a>
+						</div>
+					  </div>';	
+			}
+		?>
+
+		<!-- End of all modals -->
 		<ul id="slide-out" class="side-nav">
 			<li><a><i class="fa fa-filter fa-3x" aria-hidden="true"></i>Filter Products</a></li>
 			<li><div class="divider"></div></li>
@@ -148,3 +313,91 @@ $query=$_GET['q'];
 	</body>
 	<script type="text/javascript" src="js/search.js"></script>
 </html>
+
+<?php
+
+if(isset($_POST['signUp']))
+{
+
+$isSignUp=$user->isSignUp($_POST['firstName'],$_POST['lastName'],$_POST['userName'],$_POST['password'],$_POST['phoneNumber'],$_POST['email']);
+if($isSignUp === true)
+{
+	// echo $isSignUp;
+	echo '<script type="text/javascript">
+					$(document).ready(function(){
+					$("#modal1").modal("open");
+						});
+						</script>
+						<div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Successfully Signed Up</h4>
+    </div>
+    <div class="modal-footer">
+      <a href="index.php" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>';
+}
+elseif ($isSignUp == "Username already exists") {
+	echo '
+	<script type="text/javascript">
+					$(document).ready(function(){
+					$("#modal1").modal("open");
+						});
+						</script>
+						<div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Username already Exists</h4>
+    </div>
+    <div class="modal-footer">
+      <a href="index.php" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>';
+	// echo $isSignUp;
+}
+else{
+	// echo $isSignUp;
+	echo '
+	<script type="text/javascript">
+					$(document).ready(function(){
+					$("#modal1").modal("open");
+						});
+						</script><div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Sorry Something went</h4>
+    </div>
+    <div class="modal-footer">
+      <a href="index.php" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>';
+}
+}
+if(isset($_POST['login']))
+{
+	$userName1=$_POST["userName1"];
+	$password1=$_POST["password1"];
+	$isLogin = $user->isLogin($userName1,$password1);
+	if($isLogin === true)
+	{
+		$_SESSION['userName'] = $userName1;
+		header('location:search.php');
+	}
+	else{
+		echo '<script type="text/javascript">
+					$(document).ready(function(){
+					$("#modal1").modal("open");
+						});
+						</script>
+						<div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Wrong Credentials</h4>
+    </div>
+    <div class="modal-footer">
+      <a href="index.php" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+  </div>';
+	}
+}
+
+if(isset($_GET['logout']))
+	$user->logout();
+?>

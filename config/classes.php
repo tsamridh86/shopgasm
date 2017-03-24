@@ -4,6 +4,12 @@ class Users{
 	{
 		$this->conn=$conn;
 	}
+	public function logout()
+	{
+		unset($_SESSION['userName']);
+	 	session_destroy();
+	 	echo "<script type='text/javascript'>alert('Succesfully Logout');window.location.href = 'index.php';</script>";
+	}
 	public function isLogin($userName,$password)
 	{
 		if($userName == "admin" && $password == "admin")
@@ -72,7 +78,6 @@ class Users{
 		{
 		
 		$query1="SELECT *  from products WHERE ((name LIKE '%$str%') OR (category LIKE '%$str%')) LIMIT $start,$limit";
-
 		}
 		else{
 		$query1="SELECT *  from products WHERE ((name LIKE '%$str%') OR (category LIKE '%$str%')) LIMIT $start,$totalProducts";
@@ -121,6 +126,19 @@ class Users{
 			}
 		}	
 	}
+	public function getUserByUserName($userName)
+	{
+		$query3 = "SELECT * FROM users WHERE userName = '$userName'";
+
+		$result = $this->conn->query($query3);
+
+		if($result->num_rows >= 0)
+			return $result->fetch_assoc();
+		else
+			return "No user found";
+	}
+
+	
 
 class Admin{
 	public function __construct($conn)

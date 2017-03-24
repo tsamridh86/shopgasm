@@ -2,6 +2,13 @@
 require_once 'config/connection.php';
 require_once 'config/classes.php';
 session_start();
+
+$user = new Users($conn);
+
+if(isset($_SESSION['userName']))
+{
+	$row = $user->getUserByUserName($_SESSION['userName']);
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -68,6 +75,10 @@ session_start();
 		</div>
 		<!-- This is the signup/ login modal -->
 		<div id="accountModal" class="modal">
+		<?php
+			if(!isset($_SESSION['userName']))
+			{
+		?>
 			<div class="modal-content">
 				<div class="row">
 					<div class="col s12">
@@ -157,9 +168,22 @@ session_start();
 					</div>
 				</div>
 			</div>
-		</div>
-		<!-- This is the cart modal -->
+
 		<?php
+			}
+			else
+			{
+			echo "<div class = 'modal-content'>";
+			echo "<p>Hi ".$row['firstName']."</p>";
+			echo "</div>";
+
+			echo "<div class = 'model-footer'>";
+				echo "<a href='index.php?logout' class=' modal-action modal-close waves-effect waves-green btn-flat right'>Logout</a>";
+				echo "<a href='#!' class = 'modal-action modal-close waves-effect waves-green btn-flat right'>Close</a>";
+			echo "</div>";
+			}	
+			echo "</div>";
+		echo "<!-- This is the cart modal -->";
 			if(isset($_SESSION["userName"]))
 			{
 				echo '<div id="cartModal" class="modal">
@@ -210,7 +234,7 @@ session_start();
 	</body>
 </html>
 <?php
-$user = new Users($conn);
+
 if(isset($_POST['signUp']))
 {
 
@@ -292,4 +316,7 @@ if(isset($_POST['login']))
   </div>';
 	}
 }
+
+if(isset($_GET['logout']))
+	$user->logout();
 ?>
