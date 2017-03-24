@@ -32,3 +32,35 @@ $("#categoryClick").click(function(){
 	else
 		$("#categoryArrow").removeClass().addClass("fa fa-sort-down right")
 });
+
+function addToCart(sender){
+
+
+    var pId = sender.parentNode.parentNode.id;
+    var uId = $('#uId').html();
+    uId = parseInt(uId);
+    var formData = new FormData();
+    formData.append('uId',uId);
+    formData.append('pId',pId);
+    $.ajax({
+        url : "addToCart.php",
+        dataType: 'text',
+        cache : false, 
+        contentType : false,
+        processData : false,
+        data : formData,
+        type : 'post',
+        async:false,
+
+        success : function(response)
+        {
+            console.log("success" + response);
+            alert(response);
+        },
+        error : function(response)
+        {
+            console.log("error" + response);
+            alert(response);
+        }
+    });
+}
