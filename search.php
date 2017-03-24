@@ -63,6 +63,7 @@ if(isset($_SESSION['userName']))
 					</div>
 				</div>
 			</div>
+		</div>	
 			<!-- This is the signup/ login modal -->
 			<div id="accountModal" class="modal">
 				<?php
@@ -297,15 +298,20 @@ if(isset($_SESSION['userName']))
 				// $allProducts=json_decode($allProducts);
 				// echo $allProducts[0]["productId"];
 				$i=0;
+				echo '<p id = "uId" class = "hidden">'.$row['userId'].'</p>';
 				while($i < (count($allProducts))){
 							echo '<div class="col s12 m3">'.
 								'<div class="card z-depth-2">'.
 										'<div class="card-image waves-effect waves-block waves-light">'.
 												'<img height="300" class="activator" src="images/'.$allProducts[$i]['image'].'">'.
 										'</div>'.
-										'<div class="card-content">'.
-												'<span class="card-title activator grey-text text-darken-4">'.$allProducts[$i]['name'].'<i class="material-icons right">more_vert</i></span>'.
-										'</div>'.
+										'<div class="card-content" id = "'.$allProducts[$i]['productId'].'">'.
+												'<span class="card-title activator grey-text text-darken-4">'.$allProducts[$i]['name'].'<i class="material-icons right">more_vert</i></span>';
+												if(isset($_SESSION['userName']))
+												{
+													echo '<p><a id = "addToCart" href="#!" onClick = "addToCart(this)">Add to cart</a></p>';
+												}
+								   echo '</div>'.
 										'<div class="card-reveal">'.
 												'<span class="card-title grey-text text-darken-4">'.$allProducts[$i]['name'].'<i class="material-icons right">close</i></span>'.
 												'<p>Id : '.$allProducts[$i]['productId'].'</p>'.

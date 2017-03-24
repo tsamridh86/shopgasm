@@ -184,6 +184,15 @@ class Users{
 	{
 		return (($this->getExpensiveProduct() - $this->getCheapestProduct())/$this->gradientFactor);
 	}
+
+	public function addToCart($uId, $pId)
+	{
+		$query3 = "INSERT INTO cart (userId, productId) VALUES ('$uId', '$pId')";
+		if($this->conn->query($query3))
+			return true;
+		else
+			return false;
+	}
 }	
 class Admin{
 	public function __construct($conn)
