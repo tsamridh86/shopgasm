@@ -63,10 +63,19 @@
 		<li><div class="divider"></div></li>
 		<li><a id="priceClick" class="waves-effect"><i class="fa fa-inr fa-2x"></i>Filter by Price<i id="priceArrow" class="fa fa-sort-down right"></i></a></li>
 		<form class="hidden" id="priceCollection">
-		<li class="shiftRight"><input type="checkbox" id = "range1" value="range1" /><label for="range1">0 - 1000</label></li>
-		<li class="shiftRight"><input type="checkbox" id = "range2" value="range2" /><label for="range2">1001 - 2000</label></li>
-		<li class="shiftRight"><input type="checkbox" id = "range3" value="range3" /><label for="range3">2001 - 3000</label></li>
-		<li class="shiftRight"><input type="checkbox" id = "range4" value="range4" /><label for="range4">3001 - 4000</label></li>
+		<?php 
+		$i = $user->getCheapestProduct();
+		$max = $user->getExpensiveProduct();
+		$priceGradient = $user->getGradient();
+		while( $i < $max )
+		{
+			if($i + $priceGradient < $max)
+			echo "<li class='shiftRight'><input type='checkbox' id = 'price".$i."' value='".$i."' /><label for='price".$i."'>".ceil($i)." - ".ceil($i+$priceGradient)."</label></li>";
+			else
+			echo "<li class='shiftRight'><input type='checkbox' id = 'price".$i."' value='".$i."' /><label for='price".$i."'>".ceil($i)." - ".ceil($max)."</label></li>";
+			$i=$i+$priceGradient;
+		}
+		?>
 		</form>
 		<li><div class="divider"></div></li>
 		<li><a id="categoryClick" class="waves-effect"><i class="material-icons">view_week</i>Filter by Category<i id="categoryArrow" class="fa fa-sort-down right"></i></a></li>
