@@ -216,6 +216,29 @@ class Users{
 		else return -1;	
 
 	}
+
+	public function getValuePacks()
+	{
+		$query = "select * from products order by price asc limit 4";
+		$result = $this->conn->query($query);
+		if($result)
+		{
+			$i = 0 ;
+			while ($row = $result->fetch_assoc())
+			{
+				$allProducts[$i]['productId']=$row['productId'];
+				$allProducts[$i]['name']=$row['name'];
+				$allProducts[$i]['brand']=$row['brand'];
+				$allProducts[$i]['image']=$row['image'];
+				$allProducts[$i]['price']=$row['price'];
+				$allProducts[$i]['quantity']=$row['quantity'];
+				$allProducts[$i]['category']=$row['category'];
+				$i = $i + 1;
+			}
+			return $allProducts;
+		}
+		else return -1;
+	}
 }	
 class Admin{
 	public function __construct($conn)

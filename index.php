@@ -5,6 +5,7 @@ session_start();
 
 $user = new Users($conn);
 $latestIn = $user->getLatestProducts();
+$valuePacks = $user->getValuePacks();
 if(isset($_SESSION['userName']))
 {
 	$row = $user->getUserByUserName($_SESSION['userName']);
@@ -54,7 +55,7 @@ if(isset($_SESSION['userName']))
 		</div>
 		<div class="row">
 			<div class="col s12 m12">
-			<p> Latest in</p>
+			<h4><i class="material-icons">call_received</i> Latest in</h4>
 			</div>
 			<!-- Put this in loop from here to -->
 			<?php 
@@ -93,6 +94,49 @@ if(isset($_SESSION['userName']))
 		?>	
 			<!-- till here -->
 		</div>
+		<!-- This the value packs section -->
+		<div class="row">
+			<div class="col s12 m12">
+			<h4><i class="material-icons">call_received</i> Value Packs</h4>
+			</div>
+			<!-- Put this in loop from here to -->
+			<?php 
+			if($valuePacks == -1)
+				echo "Sorry, we got nothing for you.";
+			else
+			{
+				$i = 0;
+			 	while($i < count($valuePacks))
+			 	{ 
+					echo '<div class="col s12 m3">'.
+								'<div class="card z-depth-2">'.
+										'<div class="card-image waves-effect waves-block waves-light">'.
+												'<img height="300" class="activator" src="images/'.$valuePacks[$i]['image'].'">'.
+										'</div>'.
+										'<div class="card-content" id = "'.$valuePacks[$i]['productId'].'">'.
+												'<span class="card-title activator grey-text text-darken-4">'.$valuePacks[$i]['name'].'<i class="material-icons right">more_vert</i></span>';
+												if(isset($_SESSION['userName']))
+												{
+													echo '<p><a id = "addToCart" href="#!" onClick = "addToCart(this)">Add to cart</a></p>';
+												}
+								   echo '</div>'.
+										'<div class="card-reveal">'.
+												'<span class="card-title grey-text text-darken-4">'.$valuePacks[$i]['name'].'<i class="material-icons right">close</i></span>'.
+												'<p>Id : '.$valuePacks[$i]['productId'].'</p>'.
+												'<p>Sold By: '.$valuePacks[$i]['brand'].'</p>'.
+												'<p>Price : '.$valuePacks[$i]['price'].'</p>'.
+												'<p>Quantity Left: '.$valuePacks[$i]['quantity'].'</p>'.
+												'<p>Category: '.$valuePacks[$i]['category'].'</p>'.
+										'</div>'.
+								'</div>'.
+						'</div>';
+						$i=$i+1;
+						}
+		}
+		?>	
+			<!-- till here -->
+		</div>
+
 		<!-- This is the signup/ login modal -->
 		<div id="accountModal" class="modal">
 		<?php
