@@ -19,13 +19,13 @@
 				<a href="#" class="brand-logo">Your Orders,</a>
 				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li><a>Add Products</a></li>
-					<li><a>Cancel</a></li>
+					<li><a href="index.php">Add Products</a></li>
+					<li><a href="index.php">Cancel</a></li>
 					<li><a>Logout</a></li>
 				</ul>
 				<ul class="side-nav" id="mobile-demo">
-					<li><a>Add Products</a></li>
-					<li><a>Cancel</a></li>
+					<li><a href="index.php">Add Products</a></li>
+					<li><a href="index.php">Cancel</a></li>
 					<li><a>Logout</a></li>
 				</ul>
 			</div>

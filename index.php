@@ -6,6 +6,7 @@ session_start();
 $user = new Users($conn);
 $latestIn = $user->getLatestProducts();
 $valuePacks = $user->getValuePacks();
+$limitedStocks = $user->getLimitedStocks();
 if(isset($_SESSION['userName']))
 {
 	$row = $user->getUserByUserName($_SESSION['userName']);
@@ -97,7 +98,7 @@ if(isset($_SESSION['userName']))
 		<!-- This the value packs section -->
 		<div class="row">
 			<div class="col s12 m12">
-			<h4><i class="material-icons">call_received</i> Value Packs</h4>
+			<h4><i class="fa fa-inr"></i> Value Packs</h4>
 			</div>
 			<!-- Put this in loop from here to -->
 			<?php 
@@ -127,6 +128,49 @@ if(isset($_SESSION['userName']))
 												'<p>Price : '.$valuePacks[$i]['price'].'</p>'.
 												'<p>Quantity Left: '.$valuePacks[$i]['quantity'].'</p>'.
 												'<p>Category: '.$valuePacks[$i]['category'].'</p>'.
+										'</div>'.
+								'</div>'.
+						'</div>';
+						$i=$i+1;
+						}
+		}
+		?>	
+			<!-- till here -->
+		</div>
+
+		<!-- Limited stocks section -->
+		<div class="row">
+			<div class="col s12 m12">
+			<h4><i class="fa fa-clock-o"></i> Limited Stocks</h4>
+			</div>
+			<!-- Put this in loop from here to -->
+			<?php 
+			if($limitedStocks == -1)
+				echo "Sorry, we got nothing for you.";
+			else
+			{
+				$i = 0;
+			 	while($i < count($limitedStocks))
+			 	{ 
+					echo '<div class="col s12 m3">'.
+								'<div class="card z-depth-2">'.
+										'<div class="card-image waves-effect waves-block waves-light">'.
+												'<img height="300" class="activator" src="images/'.$limitedStocks[$i]['image'].'">'.
+										'</div>'.
+										'<div class="card-content" id = "'.$limitedStocks[$i]['productId'].'">'.
+												'<span class="card-title activator grey-text text-darken-4">'.$limitedStocks[$i]['name'].'<i class="material-icons right">more_vert</i></span>';
+												if(isset($_SESSION['userName']))
+												{
+													echo '<p><a id = "addToCart" href="#!" onClick = "addToCart(this)">Add to cart</a></p>';
+												}
+								   echo '</div>'.
+										'<div class="card-reveal">'.
+												'<span class="card-title grey-text text-darken-4">'.$limitedStocks[$i]['name'].'<i class="material-icons right">close</i></span>'.
+												'<p>Id : '.$limitedStocks[$i]['productId'].'</p>'.
+												'<p>Sold By: '.$limitedStocks[$i]['brand'].'</p>'.
+												'<p>Price : '.$limitedStocks[$i]['price'].'</p>'.
+												'<p>Quantity Left: '.$limitedStocks[$i]['quantity'].'</p>'.
+												'<p>Category: '.$limitedStocks[$i]['category'].'</p>'.
 										'</div>'.
 								'</div>'.
 						'</div>';

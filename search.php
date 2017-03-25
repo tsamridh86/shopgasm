@@ -41,7 +41,9 @@ if(isset($_SESSION['userName']))
 			<div class="card-content white-text">
 				<div class="row">
 					<div class="col s12 m2">
+					<a href="index.php">
 						<span class="card-title white-text shiftDown">Shopgasm</span>
+						</a>
 					</div>
 					<div class="input-field col s10 m6">
 						<input placeholder="Type here" id="query" name = "q" type="text" onkeyup="getProducts(this.value);" class="validate white-text autocomplete">

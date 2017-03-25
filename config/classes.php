@@ -202,16 +202,16 @@ class Users{
 			$i = 0 ;
 			while($row = $result->fetch_assoc())
 			{
-				$allProducts[$i]['productId']=$row['productId'];
-				$allProducts[$i]['name']=$row['name'];
-				$allProducts[$i]['brand']=$row['brand'];
-				$allProducts[$i]['image']=$row['image'];
-				$allProducts[$i]['price']=$row['price'];
-				$allProducts[$i]['quantity']=$row['quantity'];
-				$allProducts[$i]['category']=$row['category'];
+				$latestProducts[$i]['productId']=$row['productId'];
+				$latestProducts[$i]['name']=$row['name'];
+				$latestProducts[$i]['brand']=$row['brand'];
+				$latestProducts[$i]['image']=$row['image'];
+				$latestProducts[$i]['price']=$row['price'];
+				$latestProducts[$i]['quantity']=$row['quantity'];
+				$latestProducts[$i]['category']=$row['category'];
 				$i = $i + 1;
 			}
-			return $allProducts;
+			return $latestProducts;
 		}
 		else return -1;	
 
@@ -226,16 +226,39 @@ class Users{
 			$i = 0 ;
 			while ($row = $result->fetch_assoc())
 			{
-				$allProducts[$i]['productId']=$row['productId'];
-				$allProducts[$i]['name']=$row['name'];
-				$allProducts[$i]['brand']=$row['brand'];
-				$allProducts[$i]['image']=$row['image'];
-				$allProducts[$i]['price']=$row['price'];
-				$allProducts[$i]['quantity']=$row['quantity'];
-				$allProducts[$i]['category']=$row['category'];
+				$valuePacks[$i]['productId']=$row['productId'];
+				$valuePacks[$i]['name']=$row['name'];
+				$valuePacks[$i]['brand']=$row['brand'];
+				$valuePacks[$i]['image']=$row['image'];
+				$valuePacks[$i]['price']=$row['price'];
+				$valuePacks[$i]['quantity']=$row['quantity'];
+				$valuePacks[$i]['category']=$row['category'];
 				$i = $i + 1;
 			}
-			return $allProducts;
+			return $valuePacks;
+		}
+		else return -1;
+	}
+
+	public function getLimitedStocks()
+	{
+		$query = "select * from products order by quantity asc limit 4";
+		$result = $this->conn->query($query);
+		if($result)
+		{
+			$i = 0 ;
+			while ($row = $result->fetch_assoc())
+			{
+				$limitedStocks[$i]['productId']=$row['productId'];
+				$limitedStocks[$i]['name']=$row['name'];
+				$limitedStocks[$i]['brand']=$row['brand'];
+				$limitedStocks[$i]['image']=$row['image'];
+				$limitedStocks[$i]['price']=$row['price'];
+				$limitedStocks[$i]['quantity']=$row['quantity'];
+				$limitedStocks[$i]['category']=$row['category'];
+				$i = $i + 1;
+			}
+			return $limitedStocks;
 		}
 		else return -1;
 	}
