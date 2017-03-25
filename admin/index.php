@@ -6,8 +6,7 @@ session_start();
 $admin = new Admin($conn);
 
 $usersList = $admin->getAllUsers();
-
-$admin = new Admin($conn);
+$orderList = $admin->getAllOrders();
 $totalProducts=$admin->totalProducts();
 $start=1;
 $limit=8;
@@ -239,27 +238,26 @@ $limit=8;
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>1</td>
-							<td>userName</td>
-							<td>0123456789</td>
-							<td>somewhere</td>
-							<td>150</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>userName</td>
-							<td>0123456789</td>
-							<td>somewhere</td>
-							<td>150</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>userName</td>
-							<td>0123456789</td>
-							<td>somewhere</td>
-							<td>150</td>
-						</tr>
+					<?php
+					if($orderList == -1)
+						echo "There has been no orders yet.";
+					else
+					{
+						$i = 0 ;
+						while($i < count($orderList))
+						{
+							echo "
+							<tr>
+								<td>".$orderList[$i]['orderId']."</td>
+								<td>".$orderList[$i]['userName']."</td>
+								<td>".$orderList[$i]['phoneNo']."</td>
+								<td>".$orderList[$i]['address']."</td>
+								<td>".$orderList[$i]['total']."</td>
+							</tr>";
+							$i = $i + 1;
+						}
+					}	
+					?>	
 					</tbody>
 				</table>
 			</div>

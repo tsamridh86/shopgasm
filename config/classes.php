@@ -430,5 +430,27 @@ class Admin{
 			return "Something went wrong";
 		}
 	}
+
+	public function getAllOrders()
+	{
+		$query = "select orderId, userName, phoneNo , address, total from orders natural join users";
+		$result = $this->conn->query($query);
+		if($result)
+		{
+			$i = 0 ;
+			while ($row = $result->fetch_assoc())
+			{
+				$allOrders[$i]['orderId'] = $row['orderId'];
+				$allOrders[$i]['userName'] = $row['userName'];
+				$allOrders[$i]['phoneNo'] = $row['phoneNo'];
+				$allOrders[$i]['address'] = $row['address'];
+				$allOrders[$i]['total'] = $row['total'];
+				$i = $i + 1 ;
+			}
+			return $allOrders;
+		}
+		else 
+			return -1 ;
+	}
 }
 ?>
