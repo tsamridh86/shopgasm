@@ -193,6 +193,29 @@ class Users{
 		else
 			return false;
 	}
+	public function getLatestProducts()
+	{
+		$query = "select * from products order by productId desc limit 4";
+		$result = $this->conn->query($query);
+		if($result)
+		{
+			$i = 0 ;
+			while($row = $result->fetch_assoc())
+			{
+				$allProducts[$i]['productId']=$row['productId'];
+				$allProducts[$i]['name']=$row['name'];
+				$allProducts[$i]['brand']=$row['brand'];
+				$allProducts[$i]['image']=$row['image'];
+				$allProducts[$i]['price']=$row['price'];
+				$allProducts[$i]['quantity']=$row['quantity'];
+				$allProducts[$i]['category']=$row['category'];
+				$i = $i + 1;
+			}
+			return $allProducts;
+		}
+		else return -1;	
+
+	}
 }	
 class Admin{
 	public function __construct($conn)
@@ -237,7 +260,7 @@ class Admin{
 	 	echo "<script type='text/javascript'>alert('Succesfully Logout');window.location.href = '../index.php';</script>";
 	}
 
-	public function getLastestId ()
+	public function getLatestId ()
     {
       $id = $this->conn->query("select max(productId) as max from products");
       $id = $id->fetch_assoc();

@@ -4,10 +4,11 @@ require_once 'config/classes.php';
 session_start();
 
 $user = new Users($conn);
-
+$latestIn = $user->getLatestProducts();
 if(isset($_SESSION['userName']))
 {
 	$row = $user->getUserByUserName($_SESSION['userName']);
+	echo '<p id = "uId" class = "hidden">'.$row['userId'].'</p>';
 }
 ?>
 <!DOCTYPE html>
@@ -20,7 +21,7 @@ if(isset($_SESSION['userName']))
 		<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
 		<script type="text/javascript" src="js/materialize.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	<script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
 		<!-- The place where the css is  -->
 		<link rel="stylesheet" type="text/css" href="css/index.css">
 		<title> Welcome to Shopgasm!</title>
@@ -56,21 +57,40 @@ if(isset($_SESSION['userName']))
 			<p> Latest in</p>
 			</div>
 			<!-- Put this in loop from here to -->
-			<div class="col s6 m3">
-				<div class="card z-depth-2">
-					<div class="card-image waves-effect waves-block waves-light">
-						<img class="activator" src="images/office.jpg" height="300">
-					</div>
-					<div class="card-content">
-						<span class="card-title activator grey-text text-darken-4">Card Title<i class="material-icons right">more_vert</i></span>
-						<p><a href="#">This is a link</a></p>
-					</div>
-					<div class="card-reveal">
-						<span class="card-title grey-text text-darken-4">Card Title<i class="material-icons right">close</i></span>
-						<p>Here is some more information about this product that is only revealed once clicked on.</p>
-					</div>
-				</div>
-			</div>
+			<?php 
+			if($latestIn == -1)
+				echo "Sorry, we got nothing for you.";
+			else
+			{
+				$i = 0;
+			 	while($i < count($latestIn))
+			 	{ 
+					echo '<div class="col s12 m3">'.
+								'<div class="card z-depth-2">'.
+										'<div class="card-image waves-effect waves-block waves-light">'.
+												'<img height="300" class="activator" src="images/'.$latestIn[$i]['image'].'">'.
+										'</div>'.
+										'<div class="card-content" id = "'.$latestIn[$i]['productId'].'">'.
+												'<span class="card-title activator grey-text text-darken-4">'.$latestIn[$i]['name'].'<i class="material-icons right">more_vert</i></span>';
+												if(isset($_SESSION['userName']))
+												{
+													echo '<p><a id = "addToCart" href="#!" onClick = "addToCart(this)">Add to cart</a></p>';
+												}
+								   echo '</div>'.
+										'<div class="card-reveal">'.
+												'<span class="card-title grey-text text-darken-4">'.$latestIn[$i]['name'].'<i class="material-icons right">close</i></span>'.
+												'<p>Id : '.$latestIn[$i]['productId'].'</p>'.
+												'<p>Sold By: '.$latestIn[$i]['brand'].'</p>'.
+												'<p>Price : '.$latestIn[$i]['price'].'</p>'.
+												'<p>Quantity Left: '.$latestIn[$i]['quantity'].'</p>'.
+												'<p>Category: '.$latestIn[$i]['category'].'</p>'.
+										'</div>'.
+								'</div>'.
+						'</div>';
+						$i=$i+1;
+						}
+		}
+		?>	
 			<!-- till here -->
 		</div>
 		<!-- This is the signup/ login modal -->
@@ -232,6 +252,7 @@ if(isset($_SESSION['userName']))
 		?>
 		
 	</body>
+	<script type="text/javascript" src="js/search.js"></script>
 </html>
 <?php
 

@@ -15,7 +15,7 @@
 		$productImg = $_FILES["productImg"]["tmp_name"];
 		$productImgName = $_FILES["productImg"]["name"];
 		$extension = pathinfo($productImgName, PATHINFO_EXTENSION);
-		$productId = $admin->getLastestId();
+		$productId = $admin->getLatestId();
 		$productImgName = $productId.".".$extension;
 		
 
