@@ -225,7 +225,8 @@ if(isset($_SESSION['userName']))
 				<li><a><i class="fa fa-filter fa-3x" aria-hidden="true"></i>Filter Products</a></li>
 				<li><div class="divider"></div></li>
 				<li><a id="brandClick" class="waves-effect"><i class="fa fa-star fa-2x"></i>Filter by Brand<i id="brandArrow" class="fa fa-sort-down right"></i></a></li>
-				<form class="hidden" id="brandCollection">
+				<form>
+				<div class="hidden" id="brandCollection">
 					<?php
 					$i = 0;
 					while( $i < count($allBrands))
@@ -234,10 +235,10 @@ if(isset($_SESSION['userName']))
 						$i=$i+1;
 					}
 					?>
-				</form>
+				</div>
 				<li><div class="divider"></div></li>
 				<li><a id="priceClick" class="waves-effect"><i class="fa fa-inr fa-2x"></i>Filter by Price<i id="priceArrow" class="fa fa-sort-down right"></i></a></li>
-				<form class="hidden" id="priceCollection">
+				<div class="hidden" id="priceCollection">
 					<?php
 					$i = $user->getCheapestProduct();
 					$max = $user->getExpensiveProduct();
@@ -251,10 +252,10 @@ if(isset($_SESSION['userName']))
 						$i=$i+$priceGradient;
 					}
 					?>
-				</form>
+				</div>
 				<li><div class="divider"></div></li>
 				<li><a id="categoryClick" class="waves-effect"><i class="material-icons">view_week</i>Filter by Category<i id="categoryArrow" class="fa fa-sort-down right"></i></a></li>
-				<form class="hidden" id="categoryCollection">
+				<div class="hidden" id="categoryCollection">
 					<?php
 					$i = 0;
 					while( $i < count($allCategory))
@@ -263,6 +264,7 @@ if(isset($_SESSION['userName']))
 						$i=$i+1;
 					}
 					?>
+				</div>
 				</form>
 			</ul>
 			<div class="row">
