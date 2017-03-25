@@ -157,3 +157,11 @@ function getProducts(str)
     xhttp.open("GET", "search.php?suggest=" + str, true);
 xhttp.send();
 }
+function searchProducts()
+{
+    var str=document.getElementById("query").value;
+    if(str != "")
+    {
+        window.location="search.php?q="+str;
+    }
+}

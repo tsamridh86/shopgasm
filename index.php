@@ -40,7 +40,7 @@ if(isset($_SESSION['userName']))
 
 					</div>
 					<div class="col s1 m1">
-						<a  class="btn-floating waves-effect waves-light blue z-depth-5 btn tooltipped btn-large" data-position="bottom" data-delay="50" data-tooltip="Search" id="search"><i class="material-icons">search</i></a>
+						<a  class="btn-floating waves-effect waves-light blue z-depth-5 btn tooltipped btn-large" data-position="bottom" data-delay="50" data-tooltip="Search" id="search" onclick="searchProducts()"><i class="material-icons">search</i></a>
 
 					</div>
 					<div class="col s6 m1 align-right white-text ">
