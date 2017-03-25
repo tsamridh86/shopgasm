@@ -6,6 +6,7 @@ $user=new Users($conn);
 $start=1;
 $limit=5;
 $limitSuggest=5;
+$isFilter=0;
 if(isset($_GET['suggest']))
 {
 	$suggestedProducts=$user->suggestProducts($_GET['suggest'],$limitSuggest);
@@ -20,6 +21,35 @@ if(isset($_SESSION['userName']))
 }
 			$allBrands = $user->getAllBrands();
 			$allCategory = $user->getAllCategory();
+
+if(isset($_GET['q']))
+{
+	if(isset($_GET['brand']))
+	{
+		$brand=$_GET['brand'];
+		$isFilter=1;
+	}
+	else{
+		$brand=-1;
+	}
+	if(isset($_GET['price']))
+	{
+		$isFilter=1;
+		$price=$_GET['price'];
+	}
+	else{
+		$price=-1;
+	}
+	if(isset($_GET['category']))
+	{
+		$isFilter=1;
+		$category=$_GET['category'];
+	}
+	else{
+		$category=-1;
+	}
+	
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -170,7 +200,7 @@ if(isset($_SESSION['userName']))
 					echo "</div>";
 					echo "<div class = 'model-footer'>";
 							echo "<a href='index.php?logout' class=' modal-action modal-close waves-effect waves-green btn-flat right'>Logout</a>";
-							echo "<a href='#!' class = 'modal-action modal-close waves-effect waves-green btn-flat right'>Close</a>";
+							echo "<a class = 'modal-action modal-close waves-effect waves-green btn-flat right'>Close</a>";
 					echo "</div>";
 						}
 				echo "</div>";
@@ -195,8 +225,8 @@ if(isset($_SESSION['userName']))
 					</table>
 				</div>
 				<div id = "cartEnd" class="modal-footer">
-					<a href="#!"  id="uploadFile" class=" modal-action modal-close waves-effect waves-green btn-flat">Checkout</a>
-					<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+					<a  id="uploadFile" class=" modal-action modal-close waves-effect waves-green btn-flat">Checkout</a>
+					<a class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
 				</div>
 			</div>';
 			}
@@ -207,7 +237,7 @@ if(isset($_SESSION['userName']))
 					<p>Please Login.</p>
 				</div>
 				<div id = "modal-footer">
-					<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat right">Close</a>
+					<a class=" modal-action modal-close waves-effect waves-green btn-flat right">Close</a>
 				</div>
 			</div>';
 			}
@@ -215,7 +245,7 @@ if(isset($_SESSION['userName']))
 			</div>
 			<!-- End of all modals -->
 			<ul id="slide-out" class="side-nav">
-				<li><a><i class="fa fa-filter fa-3x" aria-hidden="true"></i>Filter Products</a></li>
+				<li><a><i class="fa fa-filter fa-3x" aria-hidden="true" onclick="getAllFilters();"></i>Filter Products</a></li>
 				<li><div class="divider"></div></li>
 				<li><a id="brandClick" class="waves-effect"><i class="fa fa-star fa-2x"></i>Filter by Brand<i id="brandArrow" class="fa fa-sort-down right"></i></a></li>
 				<form>
@@ -224,7 +254,7 @@ if(isset($_SESSION['userName']))
 					$i = 0;
 					while( $i < count($allBrands))
 					{
-						echo "<li class='shiftRight'><input type='checkbox' id = '".$allBrands[$i]."' value='".$allBrands[$i]."' /><label for='".$allBrands[$i]."'>".$allBrands[$i]."</label></li>";
+						echo "<li class='shiftRight'><input type='checkbox' onclick='searchBrands(\"".$allBrands[$i]."\");' id = '".$allBrands[$i]."' value='".$allBrands[$i]."' /><label for='".$allBrands[$i]."'>".$allBrands[$i]."</label></li>";
 						$i=$i+1;
 					}
 					?>
@@ -239,9 +269,9 @@ if(isset($_SESSION['userName']))
 					while( $i < $max )
 					{
 						if($i + $priceGradient < $max)
-						echo "<li class='shiftRight'><input type='checkbox' id = 'price".$i."' value='".$i."' /><label for='price".$i."'>".ceil($i)." - ".ceil($i+$priceGradient)."</label></li>";
+						echo "<li class='shiftRight'><input type='checkbox' onclick='searchPrice(\"".ceil($i)."\");' id = 'price".$i."' value='".$i."' /><label for='price".$i."'>".ceil($i)." - ".ceil($i+$priceGradient)."</label></li>";
 						else
-						echo "<li class='shiftRight'><input type='checkbox' id = 'price".$i."' value='".$i."' /><label for='price".$i."'>".ceil($i)." - ".ceil($max)."</label></li>";
+						echo "<li class='shiftRight'><input type='checkbox' onclick='searchPrice(\"".ceil($i)."\");' id = 'price".$i."' value='".$i."' /><label for='price".$i."'>".ceil($i)." - ".ceil($max)."</label></li>";
 						$i=$i+$priceGradient;
 					}
 					?>
@@ -253,7 +283,7 @@ if(isset($_SESSION['userName']))
 					$i = 0;
 					while( $i < count($allCategory))
 					{
-						echo "<li class='shiftRight'><input type='checkbox' id = '".$allCategory[$i]."' value='".$allCategory[$i]."' /><label for='".$allCategory[$i]."'>".$allCategory[$i]."</label></li>";
+						echo "<li class='shiftRight'><input type='checkbox' onclick='searchCategory(\"".$allCategory[$i]."\");' id = '".$allCategory[$i]."' value='".$allCategory[$i]."' /><label for='".$allCategory[$i]."'>".$allCategory[$i]."</label></li>";
 						$i=$i+1;
 					}
 					?>
@@ -265,6 +295,8 @@ if(isset($_SESSION['userName']))
 					<span class="right"><h5>
 						<!-- Put this in loop from here to -->
 						<?php
+						if($isFilter == 0)
+						{
 						if(!isset($_GET['start']))
 							{
 								$startPage=1;
@@ -284,12 +316,19 @@ if(isset($_SESSION['userName']))
 						echo " of ".$totalProducts;
 						if((($startPage)+$limit) <=$totalProducts) {?>
 						<a href="search.php?q=<?php echo $query?>&start=<?php echo $start+$limit;?>"><i id="next" class="fa fa-chevron-right fa-2x" ></i></a><?php
-					}?></h5></span>
+					}}?></h5></span>
 				</div>
 				<?php
 				$allProducts=array();
 				// $startPage=$_GET['start'];
-				$allProducts=$user->searchProducts($_GET['q'],$startPage,$limit);
+				if($isFilter == 0)
+				{
+					$allProducts=$user->searchProducts($_GET['q'],$startPage,$limit);
+				}
+				else{
+				$allProducts=$user->filterSearchProducts($_GET['q'],$brand,$category,$price);
+
+				}
 				// $allProducts=json_decode($allProducts);
 				// echo $allProducts[0]["productId"];
 				$i=0;
@@ -305,9 +344,9 @@ if(isset($_SESSION['userName']))
 												{
 													$check = $user->isInCart($row['userId'],$allProducts[$i]['productId']);
 													if(!$check)
-														echo '<p><a id = "addToCart" href="#!" onClick = "addToCart(this)">Add to cart</a></p>';
+														echo '<p><a id = "addToCart" onClick = "addToCart(this)">Add to cart</a></p>';
 													else
-														echo '<p><a id = "addToCart" href="#!" onClick = "addToCart(this)">Remove from cart</a></p>';
+														echo '<p><a id = "addToCart" onClick = "addToCart(this)">Remove from cart</a></p>';
 												}
 								   echo '</div>'.
 										'<div class="card-reveal">'.
@@ -413,6 +452,8 @@ if(isset($_SESSION['userName']))
 	</div>';
 	}
 	}
-	if(isset($_GET['logout']))
-	$user->logout();
-	?>
+if(isset($_GET['logout']))
+$user->logout();
+
+
+?>
