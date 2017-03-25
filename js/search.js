@@ -64,3 +64,84 @@ function addToCart(sender){
         }
     });
 }
+function getUrlQueryOption()
+{
+    var url=window.location.href;
+    url=url.split('?');
+    url=url[1].toString();
+    if(url.indexOf('&') ==-1)
+    {
+        return url;
+    }
+    else{
+        url=url.split('&');
+        return url[0].toString()
+    }
+
+        
+    
+}
+// function searchBrand(brand)
+// {
+//     var url=getUrl.toString();
+//     var isBrand=url.indexOf("brand");
+//     if(isBrand == -1) //no any brand searched yet
+//     {
+//         window.location.href=url+"&brand="+brand;
+//     }
+//     else //some brand searched already
+//     {
+//         // look for index of brand
+//         var temp=url.split('&');
+//         var indexOfBrand=temp.indexOf("brand");
+//         temp=temp[indexOfBrand].toString();
+//         var isMultipleBrand=temp.indexOf(',');
+//         if(isMultipleBrand == -1) //only one brand
+//         {
+//             temp=temp+","+brand;
+//             var newUrl="localhost/shopgasm/search.php?"+
+//         }
+//     }
+// }
+var brands="";
+var category="";
+var price="";
+
+function searchBrands(str)
+{
+    if(brands == "")
+    {
+        brands="&brand="+str;
+    }
+    else{
+        brands=brands+','+str;
+    }
+    console.log(brands);
+}
+function searchPrice(str)
+{
+    if(price == "")
+    {
+        price="&price="+str;
+    }
+    else{
+        price=price+','+str;
+    }
+    console.log(price);
+}
+function searchCategory(str)
+{
+    if(category == "")
+    {
+        category="&category="+str;
+    }
+    else{
+        category=category+','+str;
+    }
+    console.log(category);
+}
+function getAllFilters()
+{
+    var q=getUrlQueryOption();
+    window.location.href="search.php?"+q+brands+category+price;
+}

@@ -104,7 +104,78 @@ class Users{
 			else{
 				return "Something went wrong";
 			}
-	}		
+	}
+	public function filterSearchProducts($str,$brand=-1,$category=-1,$price = -1)
+	{
+		$query="SELECT *  from products WHERE ((name LIKE '%$str%')";
+		if($price != -1)
+		{
+			$allPrice=explode(",", $price);
+			$gradient=$this->getGradient();
+			$i=0;
+			$query = $query." AND ";
+
+			while($i < sizeof($allPrice))
+			{
+				$limit=$allPrice[$i]+$gradient;
+				$limit = ceil($limit);
+				$query=$query." (price BETWEEN $allPrice[$i] AND $limit)";
+				$query=$query."OR";
+				$i=$i+1;
+			}
+			$query=substr($query,0, -2);
+		}
+		if($brand !=-1)
+		{
+			$allBrands=explode(",", $brand);
+			$i=0;
+			$query = $query." AND ";
+			while($i < sizeof($allBrands))
+			{
+				$query = $query."(brand LIKE '%$allBrands[$i]%') ";
+				$query=$query."OR";
+				$i=$i+1;
+			}
+			$query=substr($query,0, -2);
+
+		}
+		if($category !=-1)
+		{
+			$allCategory=explode(",", $category);
+			$i=0;
+			$query = $query." AND ";
+			while($i < sizeof($allCategory))
+			{
+				$query = $query."(category LIKE '%$allCategory[$i]%') ";
+				$query=$query."OR";
+				$i=$i+1;
+			}
+			$query=substr($query,0, -2);
+
+		}
+		$query=$query.")";
+		$result= $this->conn->query($query);
+			if($result)
+			{
+				$i=0;
+				$allProducts=array();
+				while($row=$result->fetch_assoc())
+				{
+					$allProducts[$i]['productId']=$row['productId'];
+					$allProducts[$i]['name']=$row['name'];
+					$allProducts[$i]['brand']=$row['brand'];
+					$allProducts[$i]['image']=$row['image'];
+					$allProducts[$i]['price']=$row['price'];
+					$allProducts[$i]['quantity']=$row['quantity'];
+					$allProducts[$i]['category']=$row['category'];
+					$i=$i+1;
+				}
+				return $allProducts;
+			}
+			else{
+				return "Something went wrong";
+			}
+}
 
 	public function suggestProducts($str,$limit)
 	{
@@ -193,6 +264,7 @@ class Users{
 		else
 			return false;
 	}
+
 }	
 class Admin{
 	public function __construct($conn)
