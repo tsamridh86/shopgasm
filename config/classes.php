@@ -193,6 +193,42 @@ class Users{
 		else
 			return false;
 	}
+	public function isInCart($uId, $pId)
+	{
+		$query3 = "SELECT * FROM cart WHERE userId = '$uId' AND productId = '$pId'";
+		$result = $this->conn->query($query3);
+		if($result->num_rows == 0)
+			return false;
+		else
+			return true;
+	}
+	public function removeFromCart($uId, $pId)
+	{
+		$query3 = "DELETE FROM cart WHERE userId = '$uId' AND productId = '$pId'";
+		if($this->conn->query($query3))
+			return true;
+		else
+			return false;	
+	}
+	public function getProductsForCart($uId)
+	{
+		$query3 = "SELECT name, price FROM (cart NATURAL JOIN products) WHERE userId = '$uId'";
+		$result = $this->conn->query($query3);
+		if($result->num_rows == 0)
+			return "No items in Cart";
+		else
+		{
+			$i = 0;
+			while($row = $result->fetch_assoc())
+			{
+				$products[$i]['pName'] = $row['name'];
+				$products[$i]['pPrice'] = $row['price'];
+				$i = $i + 1;
+			}
+
+			return $products;
+		}		
+	}
 }	
 class Admin{
 	public function __construct($conn)
