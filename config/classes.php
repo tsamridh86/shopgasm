@@ -353,7 +353,7 @@ class Users{
 	}
 	public function getProductsForCart($uId)
 	{
-		$query3 = "SELECT productId,name, price FROM (cart NATURAL JOIN products) WHERE userId = '$uId'";
+		$query3 = "SELECT productId,name, price,quantity FROM (cart NATURAL JOIN products) WHERE userId = '$uId'";
 		$result = $this->conn->query($query3);
 		if($result->num_rows == 0)
 			return "No items in Cart";
@@ -365,6 +365,7 @@ class Users{
 				$products[$i]['pName'] = $row['name'];
 				$products[$i]['pPrice'] = $row['price'];
 				$products[$i]['pId'] = $row['productId'];
+				$products[$i]['quantity'] = $row['quantity'];
 				$i = $i + 1;
 			}
 

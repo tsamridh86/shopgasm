@@ -67,7 +67,10 @@ else
 						echo '<p class = "idHolder hidden">'.$products[$i]['pId'].'</p>';
 						echo '<tr>';
 						echo  '<td>'.$products[$i]['pName'].'</td>';
+						if($products[$i]['quantity'] >= 10)
 						echo  '<td><input type="number" value = "1" class="validate quantity col s6 m2" min="1" max="10"/></td>';
+					else
+						echo  '<td><input type="number" value = "1" class="validate quantity col s6 m2" min="1" max="'.$products[$i]['quantity'].'"/></td>';
 						echo '<td class="unitPrice">'.$products[$i]['pPrice'].'</td>';
 						echo '<td class="price"></td>';
 						echo '</tr>';
