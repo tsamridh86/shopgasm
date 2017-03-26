@@ -317,9 +317,9 @@ if(isset($_GET['q']))
 					while( $i < $max )
 					{
 						if($i + $priceGradient < $max)
-						echo "<li class='shiftRight'><input type='checkbox' onclick='searchPrice(\"".ceil($i)."\");' id = 'price".ceil($i)."' value='".ceil($i)."' /><label for='price".ceil($i)."'>".ceil($i)." - ".ceil($i+$priceGradient)."</label></li>";
+						echo "<li class='shiftRight'><input type='checkbox' onclick='searchPrice(\"".ceil($i)."\");' id = '".ceil($i)."' value='".ceil($i)."' /><label for='".ceil($i)."'>".ceil($i)." - ".ceil($i+$priceGradient)."</label></li>";
 						else
-						echo "<li class='shiftRight'><input type='checkbox' onclick='searchPrice(\"".ceil($i)."\");' id = 'price".ceil($i)."' value='".ceil($i)."' /><label for='price".ceil($i)."'>".ceil($i)." - ".ceil($max)."</label></li>";
+						echo "<li class='shiftRight'><input type='checkbox' onclick='searchPrice(\"".ceil($i)."\");' id = '".ceil($i)."' value='".ceil($i)."' /><label for='".ceil($i)."'>".ceil($i)." - ".ceil($max)."</label></li>";
 						$i=$i+$priceGradient;
 					}
 					?>
