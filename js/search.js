@@ -171,7 +171,7 @@ function getUrlQueryOption()
 var brands="";
 var category="";
 var price="";
-
+var brandFlags = new Object();
 function searchBrands(str)
 {
     if(brands == "")
@@ -179,7 +179,28 @@ function searchBrands(str)
         brands="&brand="+str;
     }
     else{
-        brands=brands+','+str;
+        if(brands.indexOf(str) == -1 && (document.getElementById(str).checked == true))
+        {
+            brandFlags[str]=1;    
+            brands=brands+','+str;
+        }
+    else if(document.getElementById(str).checked == false)
+        {
+            // if(brandFlags[str]==1) //if 
+            if((brands.split(',').length-1)== 0) //only one category
+            {
+                brands="";
+            }
+            else{
+                var index=brands.indexOf(str);
+                if(brands[index-1] != "=")
+                    brands=brands.replace(","+str,""); //remove str
+                else{ //first category don't need comma
+                    brands=brands.replace(str+",",""); //remove str
+
+                }
+            }
+        }
     }
     console.log(brands);
 }
@@ -190,7 +211,25 @@ function searchPrice(str)
         price="&price="+str;
     }
     else{
+         if(price.indexOf(str) == -1 && (document.getElementById("price"+str).checked == true))
         price=price+','+str;
+    else if(document.getElementById("price"+str).checked == false)
+        {
+            if((price.split(',').length-1)== 0) //only one category
+            {
+                price="";
+            }
+            else{
+                var index=price.indexOf(str);
+                if(price[index-1] != "=")
+                    price=price.replace(","+str,""); //remove str
+                else{ //first category don't need comma
+                    price=price.replace(str+",",""); //remove str
+
+                }
+            }
+        }
+
     }
     console.log(price);
 }
@@ -201,7 +240,24 @@ function searchCategory(str)
         category="&category="+str;
     }
     else{
+        if(category.indexOf(str) == -1 && (document.getElementById(str).checked == true))
         category=category+','+str;
+    else if(document.getElementById(str).checked == false)
+        {
+            if((category.split(',').length-1)== 0) //only one category
+            {
+                category="";
+            }
+            else{
+                var index=category.indexOf(str);
+                if(category[index-1] != "=")
+                    category=category.replace(","+str,""); //remove str
+                else{ //first category don't need comma
+                    category=category.replace(str+",",""); //remove str
+
+                }
+            }
+        }
     }
     console.log(category);
 }
