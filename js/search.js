@@ -44,11 +44,11 @@ var c = new Array();
        if (c[i].type == 'checkbox')
        {
            div=c[i].parentNode.parentNode.id;
-           console.log(div)
-           console.log(c[i].value + " "+c[i].checked);
+           // console.log(div)
+           // console.log(c[i].value + " "+c[i].checked);
            if(div == "priceCollection" && c[i].checked == true)
            {
-                console.log("in price");
+                // console.log("in price");
 
             if(price == "")
                 {
@@ -60,7 +60,7 @@ var c = new Array();
            }
            if(div == "brandCollection" && c[i].checked == true)
            {
-                console.log("in brand");
+                // console.log("in brand");
                 if(brands == "")
                 {
                     brands="&brand="+c[i].value;
@@ -72,7 +72,7 @@ var c = new Array();
            
         if(div == "categoryCollection" && c[i].checked == true)
            {
-                console.log("in category");
+                // console.log("in category");
 
                 if(category == "")
                 {
