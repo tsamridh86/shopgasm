@@ -68,33 +68,33 @@ if(isset($_SESSION['userName']))
 			 	while($i < count($latestIn))
 			 	{ 
 					echo '<div class="col s12 m3">'.
-								'<div class="card z-depth-2">'.
-										'<div class="card-image waves-effect waves-block waves-light">'.
-												'<img height="300" class="activator" src="images/'.$latestIn[$i]['image'].'">'.
-										'</div>'.
-										'<div class="card-content" id = "'.$latestIn[$i]['productId'].'">'.
-												'<span class="card-title activator grey-text text-darken-4">'.$latestIn[$i]['name'].'<i class="material-icons right">more_vert</i></span>';
-												if(isset($_SESSION['userName']))
-												{
-													$check = $user->isInCart($row['userId'],$latestIn[$i]['productId']);
-													if(!$check)
-														echo '<p><a id = "addToCart" onClick = "addToCart(this)">Add to cart</a></p>';
-													else
-														echo '<p><a id = "addToCart" onClick = "addToCart(this)">Remove from cart</a></p>';
-												}
-								   echo '</div>'.
-										'<div class="card-reveal">'.
-												'<span class="card-title grey-text text-darken-4">'.$latestIn[$i]['name'].'<i class="material-icons right">close</i></span>'.
-												'<p>Id : '.$latestIn[$i]['productId'].'</p>'.
-												'<p>Sold By: '.$latestIn[$i]['brand'].'</p>'.
-												'<p>Price : '.$latestIn[$i]['price'].'</p>'.
-												'<p>Quantity Left: '.$latestIn[$i]['quantity'].'</p>'.
-												'<p>Category: '.$latestIn[$i]['category'].'</p>'.
-										'</div>'.
+							'<div class="card z-depth-2">'.
+							'<div class="card-image waves-effect waves-block waves-light">'.
+							'<img height="300" class="activator" src="images/'.$latestIn[$i]['image'].'">'.
+							'</div>'.
+							'<div class="card-content" id = "'.$latestIn[$i]['productId'].'">'.
+							'<span class="card-title activator grey-text text-darken-4">'.$latestIn[$i]['name'].'<i class="material-icons right">more_vert</i></span>';
+							if(isset($_SESSION['userName']))
+							{
+								$check = $user->isInCart($row['userId'],$latestIn[$i]['productId']);
+								if(!$check)
+									echo '<p><a id = "addToCart" onClick = "addToCart(this)">Add to cart</a></p>';
+								else
+									echo '<p><a id = "addToCart" onClick = "addToCart(this)">Remove from cart</a></p>';
+							}
+							 echo '</div>'.
+									'<div class="card-reveal">'.
+									'<span class="card-title grey-text text-darken-4">'.$latestIn[$i]['name'].'<i class="material-icons right">close</i></span>'.
+									'<p>Id : '.$latestIn[$i]['productId'].'</p>'.
+									'<p>Sold By: '.$latestIn[$i]['brand'].'</p>'.
+									'<p>Price : '.$latestIn[$i]['price'].'</p>'.
+									'<p>Quantity Left: '.$latestIn[$i]['quantity'].'</p>'.
+									'<p>Category: '.$latestIn[$i]['category'].'</p>'.
+									'</div>'.
 								'</div>'.
 						'</div>';
 						$i=$i+1;
-						}
+				}
 		}
 		?>	
 			<!-- till here -->
@@ -297,49 +297,54 @@ if(isset($_SESSION['userName']))
 			echo "<p>Hi ".$row['firstName']."</p>";
 			echo "<p><h5>Your Orders</h5></p>";
 			$allOrders = $user->getOrders($row['userId']);
-			$i = 0;
-			while($i < count($allOrders))
+			if($allOrders=="No orders")
+				echo "<p>You have not ordered anything yet.</p>";
+			else
 			{
-				echo "<p> Order Reference Number : ".$allOrders[$i]['orderId']."<p>";
-				echo "<table>";
-					echo "<thead>";
-						echo "<tr>";
-							echo "<th>Product Name</th>";
-							echo "<th>Quantity</th>";
-							echo "<th>Unit Price</th>";
-							echo "<th>Total Price</th>";
-						echo "</tr>";
-					echo "</thead>";
-					echo "<tbody>";
-					$productIdList = json_decode($allOrders[$i]['product']);
-					$quantityList = json_decode($allOrders[$i]['quantity']);
-					$j = 0;
-					while ($j < count($productIdList)) 
-					{
-						$pList = $user->getProductByPId((int)$productIdList[$j]);
-						echo "<tr>";
-							echo  '<td>'.$pList['name'].'</td>';
-							echo  '<td class = "quantity">'.$quantityList[$j].'</td>';
-							echo  '<td class = "unitPrice">'.$pList['price'].'</td>';
-							echo  '<td class = "price"></td>';
-						echo "</tr>";
-
-						$j = $j + 1;
+				$i = 0;
+						while($i < count($allOrders))
+						{
+							echo "<p> Order Reference Number : ".$allOrders[$i]['orderId']."<p>";
+							echo "<table>";
+								echo "<thead>";
+									echo "<tr>";
+										echo "<th>Product Name</th>";
+										echo "<th>Quantity</th>";
+										echo "<th>Unit Price</th>";
+										echo "<th>Total Price</th>";
+									echo "</tr>";
+								echo "</thead>";
+								echo "<tbody>";
+								$productIdList = json_decode($allOrders[$i]['product']);
+								$quantityList = json_decode($allOrders[$i]['quantity']);
+								$j = 0;
+								while ($j < count($productIdList)) 
+								{
+									$pList = $user->getProductByPId((int)$productIdList[$j]);
+									echo "<tr>";
+										echo  '<td>'.$pList['name'].'</td>';
+										echo  '<td class = "quantity">'.$quantityList[$j].'</td>';
+										echo  '<td class = "unitPrice">'.$pList['price'].'</td>';
+										echo  '<td class = "price"></td>';
+									echo "</tr>";
+			
+									$j = $j + 1;
+								}
+								echo '<tr>
+										<th></th>
+										<td></td>
+										<th>Total = </th>
+										<td>'.$allOrders[$i]['total'].'</td>
+									</tr>';
+								echo "</tbody>";
+							echo "</table>";
+			
+							$i = $i + 1;
+						}
 					}
-					echo '<tr>
-							<th></th>
-							<td></td>
-							<th>Total = </th>
-							<td class="totalPrice"></td>
-						</tr>';
-					echo "</tbody>";
-				echo "</table>";
-
-				$i = $i + 1;
-			}
 			echo "</div>";
 
-			echo "<div class = 'model-footer'>";
+			echo "<div class = 'modal-footer'>";
 				echo "<a href='index.php?logout' class=' modal-action modal-close waves-effect waves-green btn-flat right'>Logout</a>";
 				echo "<a href='#!' class = 'modal-action modal-close waves-effect waves-green btn-flat right'>Close</a>";
 			echo "</div>";

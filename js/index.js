@@ -1,7 +1,7 @@
 $(document).ready(function() {
 	$('select').material_select();
 	$('.modal').modal();
-
+    calculatePrices();
 	
 });
 
@@ -164,4 +164,24 @@ function searchProducts()
     {
         window.location="search.php?q="+str;
     }
+}
+
+
+function calculatePrices()
+{
+    var quantityArray= [] , priceArray = [] , idArray = [] ,total = 0;
+    $(".quantity").each(function(index,element){
+        quantityArray[index] = parseInt($(element).html());
+        console.log($(element).html());
+    });
+    $(".unitPrice").each(function(index,element){
+        priceArray[index] = parseInt($(element).html());
+        console.log($(element).html());
+        
+    });
+    $(".price").each(function(index,element){
+        $(element).html(priceArray[index]*quantityArray[index]);
+        total +=priceArray[index]*quantityArray[index];
+    });
+    
 }

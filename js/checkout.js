@@ -18,7 +18,6 @@ function calculatePrices()
 	$(".quantity").each(function(index,element){
 		quantityArray[index] = parseInt($(element).val());
 	});
-	var totalItems = quantityArray.lenght;
 	$(".unitPrice").each(function(index,element){
 		priceArray[index] = parseInt($(element).html());
 	});
