@@ -245,7 +245,7 @@ if(isset($_GET['q']))
 			</div>
 			<!-- End of all modals -->
 			<ul id="slide-out" class="side-nav">
-				<li><a><i class="fa fa-filter fa-3x" aria-hidden="true" onclick="getAllFilters();"></i>Filter Products</a></li>
+				<li onclick="getAllFilters();"><a><i class="fa fa-search fa-3x" aria-hidden="true" ></i>Filter Products</a></li>
 				<li><div class="divider"></div></li>
 				<li><a id="brandClick" class="waves-effect"><i class="fa fa-star fa-2x"></i>Filter by Brand<i id="brandArrow" class="fa fa-sort-down right"></i></a></li>
 				<form>
@@ -269,9 +269,9 @@ if(isset($_GET['q']))
 					while( $i < $max )
 					{
 						if($i + $priceGradient < $max)
-						echo "<li class='shiftRight'><input type='checkbox' onclick='searchPrice(\"".ceil($i)."\");' id = 'price".$i."' value='".$i."' /><label for='price".$i."'>".ceil($i)." - ".ceil($i+$priceGradient)."</label></li>";
+						echo "<li class='shiftRight'><input type='checkbox' onclick='searchPrice(\"".ceil($i)."\");' id = 'price".ceil($i)."' value='".ceil($i)."' /><label for='price".ceil($i)."'>".ceil($i)." - ".ceil($i+$priceGradient)."</label></li>";
 						else
-						echo "<li class='shiftRight'><input type='checkbox' onclick='searchPrice(\"".ceil($i)."\");' id = 'price".$i."' value='".$i."' /><label for='price".$i."'>".ceil($i)." - ".ceil($max)."</label></li>";
+						echo "<li class='shiftRight'><input type='checkbox' onclick='searchPrice(\"".ceil($i)."\");' id = 'price".ceil($i)."' value='".ceil($i)."' /><label for='price".ceil($i)."'>".ceil($i)." - ".ceil($max)."</label></li>";
 						$i=$i+$priceGradient;
 					}
 					?>
