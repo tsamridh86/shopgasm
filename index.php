@@ -49,7 +49,7 @@ if(isset($_SESSION['userName']))
 						<a class="btn-floating btn-large waves-effect waves-light green z-depth-5 btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Account Settings" href="#accountModal" id="accountButton"><i class="material-icons">account_circle</i></a>
 					</div>
 					<div class="col s6 m1 align-right white-text ">
-						<a class="btn-floating btn-large waves-effect waves-light amber darken-4 z-depth-5 btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Cart" href="#cartModal"><i class="material-icons">shopping_cart</i></a>
+						<a id = "cart" class="btn-floating btn-large waves-effect waves-light amber darken-4 z-depth-5 btn tooltipped" data-position="bottom" data-delay="50" data-tooltip="Cart" href="#cartModal"><i class="material-icons">shopping_cart</i></a>
 					</div>
 				</div>
 			</div>
@@ -76,7 +76,11 @@ if(isset($_SESSION['userName']))
 												'<span class="card-title activator grey-text text-darken-4">'.$latestIn[$i]['name'].'<i class="material-icons right">more_vert</i></span>';
 												if(isset($_SESSION['userName']))
 												{
-													echo '<p><a id = "addToCart" href="#!" onClick = "addToCart(this)">Add to cart</a></p>';
+													$check = $user->isInCart($row['userId'],$latestIn[$i]['productId']);
+													if(!$check)
+														echo '<p><a id = "addToCart" onClick = "addToCart(this)">Add to cart</a></p>';
+													else
+														echo '<p><a id = "addToCart" onClick = "addToCart(this)">Remove from cart</a></p>';
 												}
 								   echo '</div>'.
 										'<div class="card-reveal">'.
@@ -118,7 +122,11 @@ if(isset($_SESSION['userName']))
 												'<span class="card-title activator grey-text text-darken-4">'.$valuePacks[$i]['name'].'<i class="material-icons right">more_vert</i></span>';
 												if(isset($_SESSION['userName']))
 												{
-													echo '<p><a id = "addToCart" href="#!" onClick = "addToCart(this)">Add to cart</a></p>';
+													$check = $user->isInCart($row['userId'],$valuePacks[$i]['productId']);
+													if(!$check)
+														echo '<p><a id = "addToCart" onClick = "addToCart(this)">Add to cart</a></p>';
+													else
+														echo '<p><a id = "addToCart" onClick = "addToCart(this)">Remove from cart</a></p>';
 												}
 								   echo '</div>'.
 										'<div class="card-reveal">'.
@@ -161,7 +169,11 @@ if(isset($_SESSION['userName']))
 												'<span class="card-title activator grey-text text-darken-4">'.$limitedStocks[$i]['name'].'<i class="material-icons right">more_vert</i></span>';
 												if(isset($_SESSION['userName']))
 												{
-													echo '<p><a id = "addToCart" href="#!" onClick = "addToCart(this)">Add to cart</a></p>';
+													$check = $user->isInCart($row['userId'],$limitedStocks[$i]['productId']);
+													if(!$check)
+														echo '<p><a id = "addToCart" onClick = "addToCart(this)">Add to cart</a></p>';
+													else
+														echo '<p><a id = "addToCart" onClick = "addToCart(this)">Remove from cart</a></p>';
 												}
 								   echo '</div>'.
 										'<div class="card-reveal">'.
@@ -294,35 +306,26 @@ if(isset($_SESSION['userName']))
 		echo "<!-- This is the cart modal -->";
 			if(isset($_SESSION["userName"]))
 			{
+				echo '<p id = "uId" class = "hidden">'.$row['userId'].'</p>';
 				echo '<div id="cartModal" class="modal">
 						<div class="modal-content">
 							<p><h4>Your Cart</h4></p>
-							<table>
+							<p id = "noItem"></p>
+							<table id = "cartStart">
 								<thead>
 									<tr>
 										<th data-field="name">Item Name</th>
 										<th data-field="price">Item Price</th>
 									</tr>
 								</thead>
-								<tbody>
-									<tr>
-										<td>Eclair</td>
-										<td>$0.87<i class="material-icons right">delete</i></td>
-									</tr>
-									<tr>
-										<td>Jellybean</td>
-										<td>$3.76<i class="material-icons right">delete</i></td>
-									</tr>
-									<tr>
-										<td>Lollipop</td>
-										<td>$7.00<i class="material-icons right">delete</i></td>
-									</tr>
+								<tbody id = "cartTable">
+									
 								</tbody>
 							</table>
 						</div>
-						<div class="modal-footer">
-							<a href="#!"  id="uploadFile" class=" modal-action modal-close waves-effect waves-green btn-flat">Checkout</a>
-							<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+						<div id = "cartEnd" class="modal-footer">
+							<a href="checkout.php"  id="uploadFile" class=" modal-action modal-close waves-effect waves-green btn-flat">Checkout</a>
+							<a class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
 						</div>
 					</div>';
 			}

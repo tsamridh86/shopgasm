@@ -1,3 +1,21 @@
+<?php
+require_once 'config/connection.php';
+require_once 'config/classes.php';
+session_start();
+
+$user = new Users($conn);
+
+if(!isset($_SESSION['userName']))
+{
+	header("location: index.php");
+}
+else
+{
+		$row = $user->getUserByUserName($_SESSION['userName']);
+		echo '<p id = "uId" class = "hidden">'.$row['userId'].'</p>';
+		$products = $user->getProductsForCart($row['userId']);
+}
+?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -21,12 +39,12 @@
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
 					<li><a href="index.php">Add Products</a></li>
 					<li><a href="index.php">Cancel</a></li>
-					<li><a>Logout</a></li>
+					<li><a href="checkout.php?logout">Logout</a></li>
 				</ul>
 				<ul class="side-nav" id="mobile-demo">
 					<li><a href="index.php">Add Products</a></li>
 					<li><a href="index.php">Cancel</a></li>
-					<li><a>Logout</a></li>
+					<li><a href="checkout.php?logout">Logout</a></li>
 				</ul>
 			</div>
 		</nav>
@@ -42,24 +60,20 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<td>Chocolate</td>
-							<td><input type="number" value = "1" class="validate quantity col s6 m2" min="1" max="10"/></td>
-							<td class="unitPrice">100</td>
-							<td class="price"></td>
-						</tr>
-						<tr>
-							<td>Chocolate</td>
-							<td><input type="number" value = "1" class="validate quantity col s6 m2" min="1" max="10"/></td>
-							<td class="unitPrice">25</td>
-							<td class="price"></td>
-						</tr>
-						<tr>
-							<td>Chocolate</td>
-							<td><input type="number" value = "1" class="validate quantity col s6 m2" min="1" max="10"/></td>
-							<td class="unitPrice">30</td>
-							<td class="price"></td>
-						</tr>
+					<?php
+					$i = 0;
+					while($i < count($products))
+					{
+						echo '<p class = "idHolder hidden">'.$products[$i]['pId'].'</p>';
+						echo '<tr>';
+						echo  '<td>'.$products[$i]['pName'].'</td>';
+						echo  '<td><input type="number" value = "1" class="validate quantity col s6 m2" min="1" max="10"/></td>';
+						echo '<td class="unitPrice">'.$products[$i]['pPrice'].'</td>';
+						echo '<td class="price"></td>';
+						echo '</tr>';
+						$i = $i + 1;
+					}
+					?>						
 						<tr>
 							<th></th>
 							<td></td>
@@ -71,14 +85,24 @@
 			</div>
 		</div>
 		<div class="row">
+			<form id = "order" method="post" action="complete.php">
+			<input id="uId" name = "uId" type="hidden" value = <?php echo $row['userId'];?>>
+			<input id="finalPrice" name = "finalPrice" type="hidden">
+			<input id="pIdString" name = "pIdString" type="hidden">
+			<input id="quantityString" name = "quantityString"
+			type="hidden">
 			<div class="input-field col s7 m6" >
-				<textarea id="address" class="materialize-textarea"></textarea>
+				<textarea id="address" name="address" class="materialize-textarea" required></textarea>
 				<label for="address">Address</label>
 			</div>
 			<div class="col s4 m2 right">
-				<a class="btn-large">Order</a>
+				<a id = "orderForm" class="btn-large">Order</a>
 			</div>
 		</div>
 	</body>
 	<script type="text/javascript" src="js/checkout.js"></script>
 </html>
+<?php
+	if(isset($_GET['logout']))
+	$user->logout();
+?>

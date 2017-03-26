@@ -353,7 +353,7 @@ class Users{
 	}
 	public function getProductsForCart($uId)
 	{
-		$query3 = "SELECT name, price FROM (cart NATURAL JOIN products) WHERE userId = '$uId'";
+		$query3 = "SELECT productId,name, price FROM (cart NATURAL JOIN products) WHERE userId = '$uId'";
 		$result = $this->conn->query($query3);
 		if($result->num_rows == 0)
 			return "No items in Cart";
@@ -364,11 +364,40 @@ class Users{
 			{
 				$products[$i]['pName'] = $row['name'];
 				$products[$i]['pPrice'] = $row['price'];
+				$products[$i]['pId'] = $row['productId'];
 				$i = $i + 1;
 			}
 
 			return $products;
 		}		
+	}
+
+	public function placeOrder($uId, $total, $product, $quantity, $address)
+	{
+		$query3 = "INSERT INTO orders (userId, product, quantity, total, address) VALUES ('$uId', '$product', '$quantity', '$total', '$address')";
+		if($this->conn->query($query3))
+			return true;
+		else
+			return false;
+	}
+
+	public function decrementQuantity($pId, $quantity)
+	{
+		$query3 = "UPDATE products SET quantity = quantity - '$quantity' WHERE productId = '$pId'";
+		if($this->conn->query($query3))
+			return true;
+		else
+			return false;
+
+	}
+
+	public function deleteCart($uId)
+	{
+		$query3 = "DELETE FROM cart WHERE userId = '$uId'";
+		if($this->conn->query($query3))
+			return true;
+		else
+			return false;
 	}
 }	
 class Admin{

@@ -225,7 +225,7 @@ if(isset($_GET['q']))
 					</table>
 				</div>
 				<div id = "cartEnd" class="modal-footer">
-					<a  id="uploadFile" class=" modal-action modal-close waves-effect waves-green btn-flat">Checkout</a>
+					<a  href = "checkout.php" id="uploadFile" class=" modal-action modal-close waves-effect waves-green btn-flat">Checkout</a>
 					<a class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
 				</div>
 			</div>';
