@@ -399,7 +399,42 @@ class Users{
 		else
 			return false;
 	}
+	public function getOrders($uId)
+	{
+		$query3 = "SELECT * FROM orders WHERE userId = '$uId'";
+		$result = $this->conn->query($query3);
+
+		if($result->num_rows == 0)
+			return "No orders";
+		else
+		{
+			$i = 0;
+			while($row = $result->fetch_assoc())
+			{
+				$orders[$i]['orderId'] = $row['orderId'];
+				$orders[$i]['product'] = $row['product'];
+				$orders[$i]['quantity'] = $row['quantity'];
+				$orders[$i]['total'] = $row['total'];
+				$orders[$i]['address'] = $row['address'];
+				$i = $i + 1;
+			}
+			return $orders;
+		}
+	}
+
+	public function getProductByPId($pId)
+	{
+		$query3 = "SELECT name, price FROM products WHERE productId = '$pId'";
+		$result = $this->conn->query($query3);
+		if($result->num_rows == 0)
+			return "No such Product";
+		else
+			return $result->fetch_assoc();
+	}
 }	
+
+
+
 class Admin{
 	public function __construct($conn)
 	{

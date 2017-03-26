@@ -295,6 +295,48 @@ if(isset($_SESSION['userName']))
 			{
 			echo "<div class = 'modal-content'>";
 			echo "<p>Hi ".$row['firstName']."</p>";
+			echo "<p><h5>Your Orders</h5></p>";
+			$allOrders = $user->getOrders($row['userId']);
+			$i = 0;
+			while($i < count($allOrders))
+			{
+				echo "<p> Order Reference Number : ".$allOrders[$i]['orderId']."<p>";
+				echo "<table>";
+					echo "<thead>";
+						echo "<tr>";
+							echo "<th>Product Name</th>";
+							echo "<th>Quantity</th>";
+							echo "<th>Unit Price</th>";
+							echo "<th>Total Price</th>";
+						echo "</tr>";
+					echo "</thead>";
+					echo "<tbody>";
+					$productIdList = json_decode($allOrders[$i]['product']);
+					$quantityList = json_decode($allOrders[$i]['quantity']);
+					$j = 0;
+					while ($j < count($productIdList)) 
+					{
+						$pList = $user->getProductByPId((int)$productIdList[$j]);
+						echo "<tr>";
+							echo  '<td>'.$pList['name'].'</td>';
+							echo  '<td class = "quantity">'.$quantityList[$j].'</td>';
+							echo  '<td class = "unitPrice">'.$pList['price'].'</td>';
+							echo  '<td class = "price"></td>';
+						echo "</tr>";
+
+						$j = $j + 1;
+					}
+					echo '<tr>
+							<th></th>
+							<td></td>
+							<th>Total = </th>
+							<td class="totalPrice"></td>
+						</tr>';
+					echo "</tbody>";
+				echo "</table>";
+
+				$i = $i + 1;
+			}
 			echo "</div>";
 
 			echo "<div class = 'model-footer'>";
