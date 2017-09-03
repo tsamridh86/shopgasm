@@ -25,7 +25,9 @@ Navigation:
 #3. Checkout Page
   The checkout page is reached after the user has clicked on "checkout" on the cart.(Jump to topic 7 for cart). The checkout page gets all the items on the cart, and then multiplies it with the quantity user wants, sums them up and displays to the user for final approval. The number of items purchased may not exceed 10 or the remaining quantity.
   The sum of total of items in the cart is calculated here by :
+  
     For each item i:
+    
       total = total + ( quantity(i) * price(i))
 
 #4. Administrator Page
@@ -33,12 +35,19 @@ Navigation:
   user name : admin 
   password : admin123
   during login. This redirects it to the admin page, where, the admin can, 
+  
   (i). insert items into the database.
+  
   (ii). update the items in the database.
+  
   (iiI). delete the items in the database.
+  
   (iv). view all the items in the database.
+ 
   (v). view all the orders placed on the database.
+  
   (vi). view all the users registered in the website.
+  
   
  #5. Login / Logout system.
     This menu can be accessed by clicking on the user icon available on the home page and the search page.
@@ -50,42 +59,72 @@ Navigation:
     
 #6. Filter
   The filter is only available in the search page. This feature can be accessed by clicking on the filter button on the navigation bar, this opens up a side navigation bar on the left of the page. This menu futher allows the user to sort and filter the products by :
+  
 (i) brand
+
 (ii) price
+
 (iii) category
+
 The filtered results are temporarily saved and will be used again in the next search, however upon leaving the page, the search criterias are lost.
 
 #7. Cart
   This feature is only accessible by the users that have been logged in, any unregistered user will be given the prompt to sign up to access this feature. This features allows the user to add items to thier shopping cart for a bulk purchase later. This feature is available on the home page and on the search page, and can be accessed by clicking on the shopping cart icon in the top navigation bar.
   
  #8. Database
+ 
     The database contains of 4 tables.
+    
+    
     (i) cart : which has the temporary data of the user saved.
-    (ii) users: the table of users
+    
+    (ii) users: the table of users.
+    
     (iii) products : the table of all the products on the page.
+    
     (iv) orders : the table of the all the orders that have been placed.
     
  #9. Techonology Used:
+ 
   i. HTML5
+  
   ii. CSS3
+  
   iii. materialize.css framework (CSS)
+  
   iv. JavaScript
+  
   v. jQuery
+  
   vi. jQuery-ajax
+  
   vii. PHP
+  
   viii. MySQL (database).
+  
+  
   
 #10. Setup Details
   This project requires the need of a web server and web browser.
+  
   To setup on the server side :
+  
   i.   install and run xampp server
+  
   ii.  download the folder into xampp/htdocs
+  
   iii. open localhost/phpmyadmin
-  iv.  run query : create database shopgasm
+  
+  iv.  run query : create database shopgasm.
+  
   v.   import the database.
+  
   vi.  add the items on the admin page, and you are ready to go.
   
   To run the webpage on the client side.
-  i.   open the web browser
+  
+  i.   open the web browser.
+  
   ii.  localhost/shopgasm
+  
   iii. hostedURL/shopgasm
